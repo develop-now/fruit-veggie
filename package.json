@@ -1,0 +1,23 @@
+{
+  "name": "fruit-veggie",
+  "version": "1.0.0",
+  "description": "calculator program",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^13.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/develop-now/fruit-veggie.git"
+  },
+  "author": "jieun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/develop-now/fruit-veggie/issues"
+  },
+  "homepage": "https://github.com/develop-now/fruit-veggie#readme"
+}
