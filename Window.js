@@ -3,8 +3,8 @@
 const { BrowserWindow } = require('electron')
 
 const defaultSetting = {
-    width: 1000,
-    height: 800,
+    width: 1100,
+    height: 700,
     show: false
 }
 

@@ -1,15 +1,68 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main page</title>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-    <script>window.$ = window.jQuery = require('jquery');</script>
-</head>
-<body>
-    Hello, This is Main page
-    
-    <script src="./index.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=3.0">
+        <title>Main page</title>
+        <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="style.css">
+        <script>window.$ = window.jQuery = require('jquery');</script>  
+        <style>
+          
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row pt-4">
+                <div class="col mb-5">
+                    <form>
+                        <div class="d-flex flex-row bg-light py-2 border border-info">
+                            <div  class="pl-3">
+                            품목명:
+                            <input type="text" placeholder="" >
+                            </div>
+                            <div class="pl-3 pt-1">
+                                <input type="checkbox">&nbsp;박스입고
+                            </div>
+                            <div class="pl-3">
+                                <input type="text" class="numTextBox">kg
+                            </div>
+                            <div class="pl-3">
+                                수량:
+                                <input type="text" class="numTextBox">
+                            </div>
+                            <div class="pl-3">
+                                한 박스당 수량:
+                                <input type="text" class="numTextBox">개
+                            </div>
+                            <div class="pl-3 pt-1">
+                                <input type="checkbox">&nbsp;포장유무
+                            </div>
+                            <div class="pl-3">
+                                단가:
+                                <input type="text" style="width:150px">원
+                            </div>
+                            <div class="pl-3">
+                                마진률:
+                                <input type="text" class="numTextBox" value="25">%
+                            </div>
+                        </div>
+                    </form>
+                    <div class="container">
+                        <div class="col">
+                            시간
+                        </div>
+                        <div class="col">
+                            <table>
+                                
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="./index.js"></script>
+    </body>
 </html>
