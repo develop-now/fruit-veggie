@@ -8,7 +8,7 @@ function main () {
     let mainWindow = new Window({
         file: path.join('renderer', 'index.html'),
         webPreferences: {
-            NodeIterator: true,
+            nodeIntegration: true,
             contextIsolation: false
         }
     })
