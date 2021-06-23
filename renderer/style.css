@@ -1,6 +1,12 @@
 .numTextBox{
-    width: 50px;
+    width: 40px;
 }
 .checkbox{
     padding-top:10px;
+}
+.big-checkbox{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 4px;
 }
