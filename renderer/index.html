@@ -17,39 +17,40 @@
             <div class="row pt-4">
                 <div class="col mb-5">
                     <form>
+                        <input type="hidden" name="num">
                         <div class="d-flex flex-row justify-content-center bg-light py-2 border border-info tobMenu">
                             <div  class="mx-2">
                             품목명:
-                            <input type="text" style="width:150px" id="name">
+                            <input type="text" style="width:150px" name="name">
                             </div>
                             <div class="mx-2">
                                 <label>
-                                    <input type="checkbox" class="big-checkbox" id="box" value="false">&nbsp;박스입고
+                                    <input type="checkbox" class="big-checkbox" name="box" value="false">&nbsp;박스입고
                                 </label>
                             </div>
                             <div class="mx-2">
-                                <input type="text" class="numTextBox" id="box-kg">kg
+                                <input type="text" class="numTextBox" name="box-kg">kg
                             </div>
                             <div class="mx-2">
                                 수량:
-                                <input type="text" class="numTextBox" id="quantity" required>
+                                <input type="text" class="numTextBox" name="quantity" required>
                             </div>
                             <div class="mx-2">
                                 한 박스당 수량:
-                                <input type="text" class="numTextBox" id="quantityByOneBox">개
+                                <input type="text" class="numTextBox" name="quantityByOneBox">개
                             </div>
                             <div class="mx-2">
                                 <label>
-                                    <input type="checkbox" class="big-checkbox" id="packing" value="false" >&nbsp;포장유무
+                                    <input type="checkbox" class="big-checkbox" name="packing" value="false" >&nbsp;포장유무
                                 </label>
                             </div>
                             <div class="mx-2">
                                 단가:
-                                <input type="text" style="width:70px" id="unit-price">원
+                                <input type="text" style="width:70px" name="unit-price">원
                             </div>
                             <div class="mx-2">
                                 마진률:
-                                <input type="text" class="numTextBox" id="margin-rate" value="25">%
+                                <input type="text" class="numTextBox" name="margin-rate" value="25">%
                             </div>
                             <div class="mx-2">
                                 <input type="submit"  class="bg-info btn" value="추가">
