@@ -10,3 +10,15 @@
     position: relative;
     top: 4px;
 }
+.tobMenu > div {
+    background-color: #faf2f1;
+    border-radius: 5px;
+}
+.btn {
+    border: solid 1px;
+    border-radius: 4px;
+    color: white;
+}
+.calculatorT tr{
+    text-align: center;
+}
