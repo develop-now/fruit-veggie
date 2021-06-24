@@ -3,11 +3,11 @@
 window.popper = require('popper.js')
 require('bootstrap')
 
+let randomNum = 0;
+let hasNumResult = true;
 
-
-//click - value:true unclick -value: false
-$(".big-checkbox").on('click',function(){
-    let id = this.id;
+// checked - value: true, unchecked -value: false
+$(".big-checkbox").on('click', function () {
     let value = this.value;
 
     if (this.value === 'false') {
@@ -17,9 +17,47 @@ $(".big-checkbox").on('click',function(){
     }
 });
 
-//submit 하면 checkbox의 value를 false로, checked를 unchecked로 변경해줘야한다.
+// randomNum for product id
+function getRandomNum(min, max) {
+    let min_ = Math.ceil(min);
+    let max_ = Math.floor(max);
+    return Math.floor(Math.random() * (max_ - min_ +1)) + min_ ;
+}
 
-//form 이 submit 되었었을 때 해당 form의 name 또는 id와 함께 value를 가져온다
+function hasNum() {
 
-//가져온 value를 [{key,value}]로 담는다.
-//담긴 배열을 ipcRenderer을 통해 'add-item'으로 main.js에 보낸다.
+    randomNum = getRandomNum(1,200);
+    let numArray = []
+
+    // get all values from class="num"
+    $(".num").each(function () {
+        numArray.push(this.value);
+    })
+    
+    // check randomNum has been existed
+    let i = 0;
+    while (i <= (numArray.length - 1)) {
+        if(randomNum == numArray[i]) {
+            hasNumResult = true;
+            break;
+        }
+        hasNumResult = false;
+        i++;
+    }
+}
+
+// TODO : when submit the form, change checkbox value to false and unchecked for state
+$("form").on('submit', function (e) {
+
+    e.preventDefault();
+    hasNum();
+
+    // if hasNumResult = true, call hasNum() until hasNumTesult = false
+    if(hasNumResult) {
+
+        while(hasNumResult) {
+            hasNum();
+            
+        }
+    }  
+})
