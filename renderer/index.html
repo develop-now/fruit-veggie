@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="style.css">
         <script>window.$ = window.jQuery = require('jquery');</script> 
-        <script src="validate.js"></script> 
         <style>
 
         </style>
@@ -17,11 +16,11 @@
             <div class="row pt-4">
                 <div class="col mb-5">
                     <form>
-                        <input type="hidden" name="num">
+                        <input type="hidden" name="submitNum">
                         <div class="d-flex flex-row justify-content-center bg-light py-2 border border-info tobMenu">
                             <div  class="mx-2">
                             품목명:
-                            <input type="text" style="width:150px" name="name">
+                            <input type="text" style="width:150px" name="name" required>
                             </div>
                             <div class="mx-2">
                                 <label>
@@ -29,7 +28,7 @@
                                 </label>
                             </div>
                             <div class="mx-2">
-                                <input type="text" class="numTextBox" name="box-kg">kg
+                                <input type="text" class="numTextBox defaultVal" name="box-kg" value="0">kg
                             </div>
                             <div class="mx-2">
                                 수량:
@@ -37,7 +36,7 @@
                             </div>
                             <div class="mx-2">
                                 한 박스당 수량:
-                                <input type="text" class="numTextBox" name="quantityByOneBox">개
+                                <input type="text" class="numTextBox defaultVal" name="quantityByOneBox" value="0">개
                             </div>
                             <div class="mx-2">
                                 <label>
@@ -104,6 +103,7 @@
                                 </thead>
                                 <tdody>
                                     <tr>
+                                        <input type="hidden" class="num" value="0">
                                         <td></td>
                                         <td></td>
                                         <td></td>

@@ -22,3 +22,6 @@
 .calculatorT tr{
     text-align: center;
 }
+.defaultVal {
+    color: rgb(146, 143, 143)
+}
