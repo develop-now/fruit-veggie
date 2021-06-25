@@ -3,6 +3,8 @@
 window.popper = require('popper.js')
 require('bootstrap')
 
+const { ipcRenderer } = require('electron')
+
 let randomNum = 0;
 let hasNumResult = true;
 
@@ -83,25 +85,33 @@ $(".defaultVal").on('keyup', function () {
     }
 })
 
-// modify the submited data 
+// modify the submitted data 
 $("form").on('submit', function (e) {
 
     e.preventDefault();
     let formData = $(this).serializeArray();
     let ObjectedData = new Object();
 
-    $(".big-checkbox").prop("checked", false);
-    $(".big-checkbox").val("false");
     
     for(const keys in formData) {
         
         let key = formData[keys].name;
         let value = formData[keys].value;
-
+        
         ObjectedData[key] = value;
-
+        
     }
-
-    let jsonData = JSON.stringify(ObjectedData);
     
+    let jsonData = JSON.stringify(ObjectedData);
+
+    // send submitted data to main process
+    ipcRenderer.send('add-product', jsonData);
+    
+    // init form value
+    $(".big-checkbox").prop("checked", false);
+    $(".big-checkbox").val("false");
+    $(".numTextBox").val('');
+    $("input[name = name]").val('');
+    $("input[name = unit-price]").val('');
+
 })
