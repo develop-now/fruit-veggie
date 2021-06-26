@@ -27,7 +27,7 @@ function main () {
 
         // add and save data to dataStore 
         const updatedProducts = productsData.addProduct(product).products
-        console.log("this is add-product ")
+        mainWindow.webContents.send('products', updatedProducts )
 
     })
 }

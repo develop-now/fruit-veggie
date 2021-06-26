@@ -1,10 +1,10 @@
-.numTextBox{
+.numTextBox {
     width: 40px;
 }
-.checkbox{
+.checkbox {
     padding-top:10px;
 }
-.big-checkbox{
+.big-checkbox {
     width: 20px;
     height: 20px;
     position: relative;
@@ -19,9 +19,26 @@
     border-radius: 4px;
     color: white;
 }
-.calculatorT tr{
+.calculatorT tr {
     text-align: center;
 }
+.calculatorT tr input[type=text] {
+    border:solid 1px #ebe7e7;
+}
+.table-hover {
+    border:solid 1px white;
+}
+.table-hover tr:hover td {
+    border-bottom:solid 2px rgb(2, 27, 255);
+ }
+
 .defaultVal {
     color: rgb(146, 143, 143)
+}
+.userCheck {
+    background-color: #91f0ff;
+
+}
+.priceCol {
+    background-color: rgb(253, 253, 57);
 }
