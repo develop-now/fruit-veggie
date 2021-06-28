@@ -113,36 +113,99 @@ $("form").on('submit', function (e) {
 
 ipcRenderer.on('products', function(event, products) {
     const calculatorTbody = document.getElementById('calculatorT_tbody')
-    
-    const productItems = products.reduce((html, product) => {
-        html +="<tr></tr>"
-        /* += `<tr><td><input type="hidden" class="num" value="${parseProduct.submitNum}"></td>`
-            +`<td><input type="text" value="${parseProduct.name}"></td>`
-            +`<td><input type="text" value="${parseProduct.quantity}" style="width:35px"></td>`
-            +`<td><input type="text" value="${parseProduct.quantityByOneBox}" style="width:35px">개</td>`
-            +`<td><input type="text" value="${parseProduct.unitPrice}" style="width:53px"</td>`
-            +`<td>30,000`
-            +`<input type="text" value="${parseProduct.marginRate}" style="width:28px">%`
-            +`</td>`
-            +`<td>3.000</td>`
-            +`<td><input type="checkbox"></td>`
-            +`<td class="userCheck">`
-            +`<input type="text" style="width:35px; margin-bottom:1px;" value="164">g`
-            +`<td class="userCheck">`
-            +`<input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">`
-            +`<input type="text" style="width:55px; margin-bottom:1px;" value="12,640">`
-            +`<input class="px-0 py-0" type="button" value="+" style="font-size: 12px"></td>`
-            +`<td class="priceCol">2,000</td>`
-            +`<td class="priceCol">4,000</td>`
-            +`<td class="priceCol">6,000</td>`
-            +`<td class="priceCol">8,000</td>`
-            +`<td class="priceCol">9,000</td>`
-            +`<td><input type="button" class="btn-danger btn px-0" value="삭제"></td></tr>`   
-  */           
-            
-        
-            return html
-    }, '')
+    let html = ''
+    if(products.length > 0){
 
-    calculatorTbody.innerHTML = productItems
+        products.forEach(function(product, index, products) {
+
+            let marginPrice = product.unitPrice*(product.marginRate*0.01)+product.unitPrice
+            let byGram = Math.floor(marginPrice/product.box_kg*0.1)
+            let byQuantity = Math.floor(marginPrice/product.quantityByOneBox)
+
+            html += `<tr><td>${index + 1}<input type="hidden" class="num" value="${product.submitNum}"></td>`
+                    + `<td><input type="text" class="text-align" value="${product.name}"></td>`
+                    + `<td><input type="text" value="${product.quantity}" style="width:35px"></td>`
+            
+            if(product.box ==='true' && product.box_kg != 0){
+                html += `<td><input type="text" value="${product.box_kg}" style="width:35px">kg</td>`
+            }else if(product.box ==='true' && product.quantityByOneBox != 0){
+                html += `<td><input type="text" value="${product.quantityByOneBox}" style="width:35px">개</td>`
+            }else{
+                html += `<td>-</td>`
+            }
+
+            html += `<td><input type="text" value="${product.unitPrice}" style="width:53px"</td>`
+                    + `<td>${marginPrice}&nbsp;`
+                    + `<input type="text" value="${product.marginRate}" style="width:28px">%`
+                    + `</td>`
+            
+            if(product.box === 'true' && product.quantityByOneBox != 0){
+                html += `<td>${byQuantity}원</td>`
+            }else if(product.box === 'true' && product.box_kg != 0){
+                html += `<td>${byGram}원</td>`
+            }else{
+                html += `<td>-</td>`
+            }
+            
+            if(product.packing === 'true'){
+                html += `<td><input type="checkbox"value="true" checked></td>`
+            }else{
+                html += `<td><input type="checkbox" value="false" ></td>`
+            }
+
+            html += `<td class="userCheck">`
+                    + `<input type="text" style="width:35px; margin-bottom:1px;">`
+
+            if(product.box_kg != 0){
+                    html += `g`
+            }else{
+                    html += `개`
+            }
+
+            html += `<td class="userCheck">`
+                    + `<input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">`
+                    + `<input type="text" style="width:55px; margin-bottom:1px;">`
+                    + `<input class="px-0 py-0" type="button" value="+" style="font-size: 12px"></td>`
+                    
+            if(product.box === 'true' && product.box_kg != 0){
+                if(product.packing === 'true'){
+                    html += `<td class="priceCol">${Math.floor(1000*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(1500*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(2000*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(2500*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(3000*10/byGram)*10}g</td>`
+                }else{
+                    html += `<td class="priceCol">${Math.floor(900*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(1400*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(1900*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(2400*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(2900*10/byGram)*10}g</td>`
+                }
+            }else if(product.box === 'true' && product.quantityByOneBox != 0){
+                if(product.packing === 'true'){
+                    html += `<td class="priceCol">${byQuantity-100}</td>`
+                    + `<td class="priceCol">${byQuantity*2-100}</td>`
+                    + `<td class="priceCol">${byQuantity*3-100}</td>`
+                    + `<td class="priceCol">${byQuantity*4-100}</td>`
+                    + `<td class="priceCol">${byQuantity*5-100}</td>`
+                }else{
+                    html += `<td class="priceCol">${byQuantity}</td>`
+                    + `<td class="priceCol">${byQuantity*2}</td>`
+                    + `<td class="priceCol">${byQuantity*3}</td>`
+                    + `<td class="priceCol">${byQuantity*4}</td>`
+                    + `<td class="priceCol">${byQuantity*5}</td>`
+                }
+            }else {
+                html += `<td class="priceCol">${marginPrice}</td>`
+                    + `<td class="priceCol">${marginPrice*2}</td>`
+                    + `<td class="priceCol">${marginPrice*3}</td>`
+                    + `<td class="priceCol">${marginPrice*4}</td>`
+                    + `<td class="priceCol">${marginPrice*5}</td>`
+            }
+                html += `<td><input type="button" class="btn-danger btn px-0" value="삭제"></td></tr>` 
+            
+            })
+        }
+
+    calculatorTbody.innerHTML = html
 })
