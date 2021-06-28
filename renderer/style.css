@@ -35,13 +35,8 @@ input[type=number]::-webkit-outer-spin-button {
 .table-hover tr:hover td {
     border-bottom:solid 2px rgb(2, 27, 255);
  }
-
-.defaultVal {
-    color: rgb(146, 143, 143)
-}
 .userCheck {
     background-color: #91f0ff;
-
 }
 .priceCol {
     background-color: rgb(253, 253, 57);

@@ -63,51 +63,45 @@ $("input[name=name]").on('click', function() {
 
 })
 
-// init defaultVal 
-$(".defaultVal").on('click', function () {
-    if(this.value == 0){
-        this.value = '';
-    }
-})
-$(".defaultVal").on('keydown', function () {
-    if(this.value == 0){
-        this.value = '';
-    }
-})
+// set Non a Number to 0
+function setDefaultValue(value){
+    let value_ = value
 
-// change defaultVal color and value 
-$(".defaultVal").on('keyup', function () {
-    if(this.value != '') {
-        this.style.color = 'black';
-    }else if(this.value === '') {
-        this.value = 0;
-        this.style.color = 'rgb(146, 143, 143)';
+    if(isNaN(value_)){
+        value_ = 0
     }
-})
+    return value_
+}
 
-// modify the submitted data 
 $("form").on('submit', function (e) {
-
     e.preventDefault();
-    let formData = $(this).serializeArray();
-    let ObjectedData = new Object();
 
+    // get and set value to object
+    const submitNum = parseInt($('input[name=submitNum]').val())
+    const name = $('input[name=name]').val()
+    const box = $('input[name=box]').val()
+    const box_kg = setDefaultValue(parseInt($('input[name=box_kg]').val()))
+    const quantity = parseInt($('input[name=quantity]').val())
+    const quantityByOneBox = setDefaultValue(parseInt($('input[name=quantityByOneBox]').val()))
+    const packing = $('input[name=packing]').val()
+    const unitPrice = parseInt($('input[name=unitPrice]').val())
+    const marginRate = parseInt($('input[name=marginRate]').val())
     
-    for(const keys in formData) {
-        
-        let key = formData[keys].name;
-        let value = formData[keys].value;
-        
-        ObjectedData[key] = value;
-        
+    let formData = {
+        submitNum : submitNum,
+        name : name,
+        box : box,
+        box_kg : box_kg,
+        quantity : quantity,
+        quantityByOneBox : quantityByOneBox,
+        packing : packing,
+        unitPrice : unitPrice,
+        marginRate : marginRate,
     }
     
-    let jsonData = JSON.stringify(ObjectedData);
-
-    // send submitted data to main process
-    ipcRenderer.send('add-product', jsonData);
-    
-    
+    //send submitted data to main process
+    ipcRenderer.send('add-product', formData);
+        
     // init form value
     $(".big-checkbox").prop("checked", false);
     $(".big-checkbox").val("false");
@@ -120,34 +114,35 @@ $("form").on('submit', function (e) {
 ipcRenderer.on('products', function(event, products) {
     const calculatorTbody = document.getElementById('calculatorT_tbody')
     
-    const html = `<td>1</td>
-    <td><input type="text" value="양파"></td>
-    <td><input type="text" value="100" style="width:35px"></td>
-    <td><input type="text" value="100" style="width:35px">개</td>
-    <td><input type="text" value="32,000" style="width:53px"</td>
-    <td>30,000
-        <input type="text" value="25" style="width:28px">%
-    </td>
-    <td>3.000</td>
-    <td><input type="checkbox"></td>
-    <td class="userCheck">
-        <input type="text" style="width:35px; margin-bottom:1px;" value="164">g
-        <input type="text" style="width:35px" value="164">g</td>
-    <td class="userCheck">
-        <input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">
-        <input type="text" style="width:55px; margin-bottom:1px;" value="12,640">
-        <input class="px-0 py-0" type="button" value="+" style="font-size: 12px">
+    const productItems = products.reduce((html, product) => {
+        html +="<tr></tr>"
+        /* += `<tr><td><input type="hidden" class="num" value="${parseProduct.submitNum}"></td>`
+            +`<td><input type="text" value="${parseProduct.name}"></td>`
+            +`<td><input type="text" value="${parseProduct.quantity}" style="width:35px"></td>`
+            +`<td><input type="text" value="${parseProduct.quantityByOneBox}" style="width:35px">개</td>`
+            +`<td><input type="text" value="${parseProduct.unitPrice}" style="width:53px"</td>`
+            +`<td>30,000`
+            +`<input type="text" value="${parseProduct.marginRate}" style="width:28px">%`
+            +`</td>`
+            +`<td>3.000</td>`
+            +`<td><input type="checkbox"></td>`
+            +`<td class="userCheck">`
+            +`<input type="text" style="width:35px; margin-bottom:1px;" value="164">g`
+            +`<td class="userCheck">`
+            +`<input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">`
+            +`<input type="text" style="width:55px; margin-bottom:1px;" value="12,640">`
+            +`<input class="px-0 py-0" type="button" value="+" style="font-size: 12px"></td>`
+            +`<td class="priceCol">2,000</td>`
+            +`<td class="priceCol">4,000</td>`
+            +`<td class="priceCol">6,000</td>`
+            +`<td class="priceCol">8,000</td>`
+            +`<td class="priceCol">9,000</td>`
+            +`<td><input type="button" class="btn-danger btn px-0" value="삭제"></td></tr>`   
+  */           
+            
+        
+            return html
+    }, '')
 
-        <input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">
-        <input type="text" style="width:55px" value="12,640">
-        <input class="px-0 py-0" type="button" value="+" style="font-size: 12px">
-    </td>
-    <td class="priceCol">2,000</td>
-    <td class="priceCol">4,000</td>
-    <td class="priceCol">6,000</td>
-    <td class="priceCol">8,000</td>
-    <td class="priceCol">9,000</td>
-    <td><input type="button" class="btn-danger btn px-0" value="삭제"></td>`
-    
-    calculatorTbody.innerHTML = html
+    calculatorTbody.innerHTML = productItems
 })
