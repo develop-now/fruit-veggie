@@ -19,7 +19,7 @@ function main () {
     })
 
     mainWindow.once('show', () => {
-        mainWindow.webContents.send('products', productsData.products )
+        mainWindow.webContents.send('products', productsData.getProducts())
     })
 
     // catch the data from renderer process(index.js)
@@ -27,9 +27,12 @@ function main () {
 
         // add and save data to dataStore 
         const updatedProducts = productsData.addProduct(product).products
+
+        // send to index.html updatedData
         mainWindow.webContents.send('products', updatedProducts )
 
     })
+
 }
 
 app.on('ready', main)
