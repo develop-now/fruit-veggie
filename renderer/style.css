@@ -3,7 +3,7 @@ input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 }
 .numTextBox {
-    width: 40px;
+    width: 35px;
 }
 .checkbox {
     padding-top:10px;
@@ -28,9 +28,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .calculatorT tr input[type=text] {
     border:solid 1px #ebe7e7;
-}
-.table-hover {
-    border:solid 1px white;
 }
 .table-hover tr:hover td {
     border-bottom:solid 2px rgb(2, 27, 255);
