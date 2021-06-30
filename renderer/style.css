@@ -44,6 +44,9 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
 .calculatorT tr input[type=number]{
     text-align: right;
 }
+.calculatorT tr input[type=text]{
+    text-align: center;
+}
 .table-hover tr:hover td {
     border-bottom:solid 2px rgb(2, 27, 255);
     border-top: solid 1px #00bfff !important;

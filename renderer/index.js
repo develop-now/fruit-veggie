@@ -123,7 +123,7 @@ ipcRenderer.on('products', function(event, products) {
             let byQuantity = Math.floor(marginPrice/product.quantityByOneBox)
 
             html += `<tr><td>${index + 1}<input type="hidden" class="num" value="${product.submitNum}"></td>`
-                    + `<td><input type="text" style="text-align:center" value="${product.name}"></td>`
+                    + `<td><input type="text" value="${product.name}"></td>`
                     + `<td><input type="number" value="${product.quantity}" style="width:35px"></td>`
             
             if(product.box ==='true' && product.box_kg != 0){
