@@ -134,9 +134,9 @@ ipcRenderer.on('products', function(event, products) {
                 html += `<td>-</td>`
             }
 
-            html += `<td><input type="text" value="${product.unitPrice}" style="width:53px"</td>`
+            html += `<td><input type="number" value="${product.unitPrice}" style="width:53px"</td>`
                     + `<td>${marginPrice}&nbsp;&#47;`
-                    + `<input type="text" value="${product.marginRate}" style="width:28px"><span class="lightText">%<span>`
+                    + `<input type="number" value="${product.marginRate}" style="width:28px"><span class="lightText">%<span>`
                     + `</td>`
             
             if(product.box === 'true' && product.quantityByOneBox != 0){
