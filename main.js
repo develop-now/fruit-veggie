@@ -5,7 +5,11 @@ const { app, ipcMain } = require('electron')
 const Window = require('./Window')
 const DataStore = require('./DataStore')
 
-require('electron-reload')(__dirname)
+require('electron-reload')(__dirname,{
+    
+    electron: require(`${__dirname}/node_modules/electron`)
+
+})
 
 const productsData = new DataStore({ name: 'Products Main' })
 
@@ -32,7 +36,9 @@ function main () {
         mainWindow.webContents.send('products', updatedProducts )
 
     })
-
+        
+    //delete all todo
+    //const deleteAll = productsData.deleteProduct()
 }
 
 app.on('ready', main)
