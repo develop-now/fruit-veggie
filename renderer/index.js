@@ -123,26 +123,26 @@ ipcRenderer.on('products', function(event, products) {
             let byQuantity = Math.floor(marginPrice/product.quantityByOneBox)
 
             html += `<tr><td>${index + 1}<input type="hidden" class="num" value="${product.submitNum}"></td>`
-                    + `<td><input type="text" class="text-align" value="${product.name}"></td>`
-                    + `<td><input type="text" value="${product.quantity}" style="width:35px"></td>`
+                    + `<td><input type="text" style="text-align:center" value="${product.name}"></td>`
+                    + `<td><input type="number" value="${product.quantity}" style="width:35px"></td>`
             
             if(product.box ==='true' && product.box_kg != 0){
-                html += `<td><input type="text" value="${product.box_kg}" style="width:35px">kg</td>`
+                html += `<td><input type="number" value="${product.box_kg}" style="width:35px"><span class="lightText">kg<span></td>`
             }else if(product.box ==='true' && product.quantityByOneBox != 0){
-                html += `<td><input type="text" value="${product.quantityByOneBox}" style="width:35px">개</td>`
+                html += `<td><input type="number" value="${product.quantityByOneBox}" style="width:35px"><span class="lightText">개<span></td>`
             }else{
                 html += `<td>-</td>`
             }
 
             html += `<td><input type="text" value="${product.unitPrice}" style="width:53px"</td>`
-                    + `<td>${marginPrice}&nbsp;`
-                    + `<input type="text" value="${product.marginRate}" style="width:28px">%`
+                    + `<td>${marginPrice}&nbsp;&#47;`
+                    + `<input type="text" value="${product.marginRate}" style="width:28px"><span class="lightText">%<span>`
                     + `</td>`
             
             if(product.box === 'true' && product.quantityByOneBox != 0){
-                html += `<td>${byQuantity}원</td>`
+                html += `<td>${byQuantity}<span class="lightText">원<span></td>`
             }else if(product.box === 'true' && product.box_kg != 0){
-                html += `<td>${byGram}원</td>`
+                html += `<td>${byGram}<span class="lightText">원<span></td>`
             }else{
                 html += `<td>-</td>`
             }
@@ -154,7 +154,7 @@ ipcRenderer.on('products', function(event, products) {
             }
 
             html += `<td class="userCheck">`
-                    + `<input type="text" style="width:35px; margin-bottom:1px;">`
+                    + `<input type="number" style="width:35px; margin-bottom:1px;">`
 
             if(product.box_kg != 0){
                     html += `g`
@@ -164,7 +164,7 @@ ipcRenderer.on('products', function(event, products) {
 
             html += `<td class="userCheck">`
                     + `<input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">`
-                    + `<input type="text" style="width:55px; margin-bottom:1px;">`
+                    + `<input type="number" style="width:55px; margin-bottom:1px;">`
                     + `<input class="px-0 py-0" type="button" value="+" style="font-size: 12px"></td>`
                     
             if(product.box === 'true' && product.box_kg != 0){
