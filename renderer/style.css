@@ -60,3 +60,6 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
 .lightText {
     color:gray
 }
+.boxCheked {
+    display: none;
+}

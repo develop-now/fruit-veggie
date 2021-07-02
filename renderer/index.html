@@ -27,14 +27,14 @@
                                     <input type="checkbox" class="big-checkbox" name="box" value="false">&nbsp;박스입고
                                 </label>
                             </div>
-                            <div class="mx-2">
+                            <div class="mx-2 boxCheked">
                                 <input type="number" class="numTextBox" name="box_kg">kg
                             </div>
                             <div class="mx-2">
                                 수량:
                                 <input type="number" class="numTextBox" name="quantity" required>
                             </div>
-                            <div class="mx-2">
+                            <div class="mx-2 boxCheked">
                                 한 박스당 수량:
                                 <input type="number" class="numTextBox" name="quantityByOneBox">개
                             </div>
@@ -109,8 +109,10 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div>
+                            <button class="btn btn-info float-right" id="priceT">판매표 확인하기</button>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
