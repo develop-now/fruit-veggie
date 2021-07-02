@@ -210,7 +210,7 @@ ipcRenderer.on('products', function(event, products) {
                     + `<td class="priceCol">${marginPrice*4}</td>`
                     + `<td class="priceCol">${marginPrice*5}</td>`
             }
-                html += `<td><input type="button" class="btn-danger btn px-0" value="삭제"></td></tr>` 
+                html += `<td><input type="button" class="btn-danger btn px-0 deletebtn" value="삭제"></td></tr>` 
             
             })
         }
@@ -249,4 +249,12 @@ $('#calculatorT_tbody').on('click','.savebtn', function () {
     }
     let changeInfo = [index, itemNum, modifyobj];
     ipcRenderer.send('modify-product',changeInfo)
+})
+
+// send the submitNum for delete
+$('#calculatorT_tbody').on('click', '.deletebtn', function () {
+    let index = parseInt($(this).parent().parent().prev().prev().val())-1
+    let submitNum = parseInt($(this).parent().parent().prev().val())
+    let deleteInfo = [index, submitNum]
+    ipcRenderer.send('delete-product', deleteInfo)
 })

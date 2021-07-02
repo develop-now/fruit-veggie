@@ -46,8 +46,14 @@ function main () {
         // send to index.html modifiedData
         mainWindow.webContents.send('products', modifiedProducts)
     })
-    //delete all todo
-    //const deleteAll = productsData.deleteProduct()
+
+    ipcMain.on('delete-product', function (event, deleteInfo) {
+    
+        const updatedProducts = productsData.deleteProduct(deleteInfo).products
+        
+        mainWindow.webContents.send('products', updatedProducts)
+    })
+
 }
 
 app.on('ready', main)
