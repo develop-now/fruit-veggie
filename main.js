@@ -12,6 +12,7 @@ require('electron-reload')(__dirname,{
 })
 
 const productsData = new DataStore({ name: 'Products Main' })
+let priceWindow
 
 function main () {
     let mainWindow = new Window({
@@ -52,6 +53,28 @@ function main () {
         const updatedProducts = productsData.deleteProduct(deleteInfo).products
         
         mainWindow.webContents.send('products', updatedProducts)
+    })
+
+    ipcMain.on('price-window', function () {
+
+        if (!priceWindow) {
+            priceWindow = new Window({
+
+                file: path.join('renderer', 'price.html'),
+                width: 500,
+                height: 600,
+                webPreferences: {
+                    nodeIntegration: true,
+                    contextIsolation: false
+                },
+                parent: mainWindow,
+            })
+
+            priceWindow.on('closed', function () {
+                priceWindow = null
+            })
+
+        }
     })
 
 }

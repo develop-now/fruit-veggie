@@ -52,8 +52,16 @@ $(".big-checkbox").on('click', function () {
     this.value = checkboxVal(value);
 });
 
+$("input[name=box]").on('click', function () {
+    if(this.value === 'true'){
+        $(".boxCheked").css('display', 'block')
+    }else{
+        $(".boxCheked").css('display', 'none')
+    }
+})
+
 // put randomNum to input tag (name="submitNum") in form
-$("input[name=name]").on('click', function() {
+$("input[name=name]").on('click', function () {
     hasNum();
 
     // if hasNumResult = true, callback hasNum() until hasNumResult = false
@@ -69,7 +77,7 @@ $("input[name=name]").on('click', function() {
 })
 
 // set Non a Number to 0
-function setDefaultValue(value){
+function setDefaultValue (value) {
     let value_ = value
 
     if(isNaN(value_)){
@@ -113,15 +121,16 @@ $("form").on('submit', function (e) {
     $(".numTextBox").val('');
     $("input[name = name]").val('');
     $("input[name = unit-price]").val('');
+    $(".boxCheked").css('display', 'none')
     
 })
 
-ipcRenderer.on('products', function(event, products) {
+ipcRenderer.on('products', function (event, products) {
     const calculatorTbody = document.getElementById('calculatorT_tbody')
     let html = ''
     if(products.length > 0){
 
-        products.forEach(function(product, index, products) {
+        products.forEach(function (product, index, products) {
 
             let marginPrice = product.unitPrice*(product.marginRate*0.01)+product.unitPrice
             let byGram = Math.floor(marginPrice/product.box_kg*0.1)
@@ -257,4 +266,9 @@ $('#calculatorT_tbody').on('click', '.deletebtn', function () {
     let submitNum = parseInt($(this).parent().parent().prev().val())
     let deleteInfo = [index, submitNum]
     ipcRenderer.send('delete-product', deleteInfo)
+})
+
+// open price Table window
+$('#priceT').on('click', function () {
+    ipcRenderer.send('price-window')
 })
