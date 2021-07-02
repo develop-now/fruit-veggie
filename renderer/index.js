@@ -3,7 +3,7 @@
 window.popper = require('popper.js')
 require('bootstrap')
 
-const { ipcRenderer } = require('electron')
+const { ipcRenderer, ipcMain } = require('electron')
 
 let randomNum = 0;
 let hasNumResult = true;
@@ -37,14 +37,19 @@ function hasNum() {
     }
 }
 
+// change value
+function checkboxVal(value){
+    if (value === 'false') {
+        return 'true';
+    }else {
+        return 'false';
+    }
+}
+
 // checked - value: true, unchecked - value: false
 $(".big-checkbox").on('click', function () {
-
-    if (this.value === 'false') {
-        this.value = 'true';
-    }else {
-        this.value = 'false';
-    }
+    let value = this.value;
+    this.value = checkboxVal(value);
 });
 
 // put randomNum to input tag (name="submitNum") in form
@@ -122,21 +127,23 @@ ipcRenderer.on('products', function(event, products) {
             let byGram = Math.floor(marginPrice/product.box_kg*0.1)
             let byQuantity = Math.floor(marginPrice/product.quantityByOneBox)
 
-            html += `<tr><td>${index + 1}<input type="hidden" class="num" value="${product.submitNum}"></td>`
-                    + `<td><input type="text" value="${product.name}"></td>`
-                    + `<td><input type="number" value="${product.quantity}" style="width:35px"></td>`
+            html += `<input type="hidden" class="num" value="${index+1}">`
+                    + `<input type="hidden" class="num" value="${product.submitNum}">`
+                    + `<tr><td>${index + 1}<input type="hidden" class="num" value="${product.submitNum}"></td>`
+                    + `<td><input type="text" class="productInfo" name="name" value="${product.name}"></td>`
+                    + `<td><input type="number" class="productInfo" name="quantity" value="${product.quantity}" style="width:35px"></td>`
             
             if(product.box ==='true' && product.box_kg != 0){
-                html += `<td><input type="number" value="${product.box_kg}" style="width:35px"><span class="lightText">kg<span></td>`
+                html += `<td><input type="number" class="productInfo" name="box_kg" value="${product.box_kg}" style="width:35px"><span class="lightText">kg<span></td>`
             }else if(product.box ==='true' && product.quantityByOneBox != 0){
-                html += `<td><input type="number" value="${product.quantityByOneBox}" style="width:35px"><span class="lightText">개<span></td>`
+                html += `<td><input type="number" class="productInfo" name="quantityByOneBox" value="${product.quantityByOneBox}" style="width:35px"><span class="lightText">개<span></td>`
             }else{
                 html += `<td>-</td>`
             }
 
-            html += `<td><input type="number" value="${product.unitPrice}" style="width:53px"</td>`
+            html += `<td><input type="number" class="productInfo" name="unitPrice" value="${product.unitPrice}" style="width:53px"</td>`
                     + `<td>${marginPrice}&nbsp;&#47;`
-                    + `<input type="number" value="${product.marginRate}" style="width:28px"><span class="lightText">%<span>`
+                    + `<input type="number" class="productInfo" name="marginRate" value="${product.marginRate}" style="width:28px"><span class="lightText">%<span>`
                     + `</td>`
             
             if(product.box === 'true' && product.quantityByOneBox != 0){
@@ -148,12 +155,13 @@ ipcRenderer.on('products', function(event, products) {
             }
             
             if(product.packing === 'true'){
-                html += `<td><input type="checkbox"value="true" checked></td>`
+                html += `<td><input type="checkbox" class="productInfo infoCheckbox" name="packing" value="true" checked></td>`
             }else{
-                html += `<td><input type="checkbox" value="false" ></td>`
+                html += `<td><input type="checkbox" class="productInfo infoCheckbox" name="packing" value="false" ></td>`
             }
 
-            html += `<td class="userCheck">`
+            html += `<td><input type="button" class="btn-info btn px-0 savebtn" style="font-size:13px"value="저장"></td>`
+                    + `<td class="userCheck">`
                     + `<input type="number" style="width:35px; margin-bottom:1px;">`
 
             if(product.box_kg != 0){
@@ -208,4 +216,37 @@ ipcRenderer.on('products', function(event, products) {
         }
 
     calculatorTbody.innerHTML = html
+    
+})
+
+// set value when clicked checkbox in table
+$('#calculatorT_tbody').on('click','.infoCheckbox', function () {
+    let value = this.value
+    this.value = checkboxVal(value)
+})
+
+$('#calculatorT_tbody').on('click','.savebtn', function () {
+    let index = parseInt($(this).parent().parent().prev().prev().val())-1
+    let itemNum = parseInt($(this).parent().parent().prev().val())
+    let name = $(this).parent().prev().prev().prev().prev().prev().prev().prev().children().val()
+    let quantity =  parseInt($(this).parent().prev().prev().prev().prev().prev().prev().children().val())
+    let kg_quantity = parseInt($(this).parent().prev().prev().prev().prev().prev().children().val())
+    let unitPrice = parseInt($(this).parent().prev().prev().prev().prev().children().val())
+    let marginRate = parseInt($(this).parent().prev().prev().prev().children().val())
+    let packing = $(this).parent().prev().children().val()
+
+    if(kg_quantity === undefined) {
+        kg_quantity = 0;
+    }
+
+    let modifyobj = {
+        name : name,
+        kg_quantity : kg_quantity,
+        quantity : quantity,
+        packing : packing,
+        unitPrice : unitPrice,
+        marginRate : marginRate,
+    }
+    let changeInfo = [index, itemNum, modifyobj];
+    ipcRenderer.send('modify-product',changeInfo)
 })
