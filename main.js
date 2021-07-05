@@ -78,7 +78,7 @@ function main () {
         if (!priceWindow) {
             priceWindow = new Window({
 
-                file: path.join('renderer', 'price.html'),
+                file: path.join('renderer', 'price-table.html'),
                 width: 500,
                 height: 600,
                 webPreferences: {
@@ -92,6 +92,11 @@ function main () {
                 priceWindow = null
             })
 
+            priceWindow.once('show', function () {
+                const data = [productsData.getProducts(), confirmData.getProducts()]
+                priceWindow.webContents.send('confirm-Price', data)
+            })
+            
         }
     })
 

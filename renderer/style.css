@@ -41,10 +41,10 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
 .calculatorT tr input[type=text], .calculatorT tr input[type=number]{
     border:solid 1px #ebe7e7;
 }
-.calculatorT tr input[type=number]{
+.calculatorT tr input[type=number] {
     text-align: right;
 }
-.calculatorT tr input[type=text]{
+.calculatorT tr input[type=text] {
     text-align: center;
 }
 .table-hover tr:hover td {
@@ -62,4 +62,18 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
 }
 .boxCheked {
     display: none;
+}
+
+/* price table */
+#priceT_tbody > tr > td:nth-child(1),td:nth-child(2) {
+    text-align: center;
+}
+#priceT_tbody > tr > td:nth-child(3),td:nth-child(4) {
+    text-align: right;
+}
+#priceT_tbody > tr > td > span {
+    font-weight: bold;
+}
+.tr_bg {
+    background-color:#e7f7f7;
 }
