@@ -99,6 +99,8 @@ $("form").on('submit', function (e) {
     const packing = $('input[name=packing]').val()
     const unitPrice = parseInt($('input[name=unitPrice]').val())
     const marginRate = parseInt($('input[name=marginRate]').val())
+    const confirmQuantity = 0;
+    const confirmPrice = 0;
     
     let formData = {
         submitNum : submitNum,
@@ -111,9 +113,18 @@ $("form").on('submit', function (e) {
         unitPrice : unitPrice,
         marginRate : marginRate,
     }
+
+    // init user confirmation data with submitNum 
+    let userConfirm = {
+        submitNum : submitNum,
+        name : name,
+        confirmQuantity : confirmQuantity,
+        confirmPrice : confirmPrice
+    }
     
-    //send submitted data to main process
-    ipcRenderer.send('add-product', formData);
+    let data = [formData , userConfirm]
+    // send submitted data and inited userConfirmation to main process
+    ipcRenderer.send('add-product', data);
         
     // init form value
     $(".big-checkbox").prop("checked", false);
@@ -125,13 +136,16 @@ $("form").on('submit', function (e) {
     
 })
 
-ipcRenderer.on('products', function (event, products) {
+ipcRenderer.on('products', function (event, data_) {
+    let products = data_[0]
+    let confirmations = data_[1]
+
     const calculatorTbody = document.getElementById('calculatorT_tbody')
     let html = ''
     if(products.length > 0){
 
         products.forEach(function (product, index, products) {
-
+            let confirmData = confirmations[index]
             let marginPrice = product.unitPrice*(product.marginRate*0.01)+product.unitPrice
             let byGram = Math.floor(marginPrice/product.box_kg*0.1)
             let byQuantity = Math.floor(marginPrice/product.quantityByOneBox)
@@ -171,17 +185,17 @@ ipcRenderer.on('products', function (event, products) {
 
             html += `<td><input type="button" class="btn-info btn px-0 savebtn" style="font-size:13px"value="저장"></td>`
                     + `<td class="userCheck">`
-                    + `<input type="number" style="width:35px; margin-bottom:1px;">`
+                    + `<input type="number" value="${confirmData.confirmQuantity}" style="width:35px; margin-bottom:1px;">`
 
-            if(product.box_kg != 0){
-                    html += `g`
+            if(product.box_kg != 0) {
+                html += `g`
             }else{
-                    html += `개`
+                html += `개`
             }
 
             html += `<td class="userCheck">`
                     + `<input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">`
-                    + `<input type="number" style="width:55px; margin-bottom:1px;">`
+                    + `<input type="number" value="${confirmData.confirmPrice}" style="width:55px; margin-bottom:1px;">`
                     + `<input class="px-0 py-0" type="button" value="+" style="font-size: 12px"></td>`
                     
             if(product.box === 'true' && product.box_kg != 0){
@@ -235,6 +249,8 @@ $('#calculatorT_tbody').on('click','.infoCheckbox', function () {
 })
 
 $('#calculatorT_tbody').on('click','.savebtn', function () {
+    
+    // get product info
     let index = parseInt($(this).parent().parent().prev().prev().val())-1
     let itemNum = parseInt($(this).parent().parent().prev().val())
     let name = $(this).parent().prev().prev().prev().prev().prev().prev().prev().children().val()
@@ -244,9 +260,16 @@ $('#calculatorT_tbody').on('click','.savebtn', function () {
     let marginRate = parseInt($(this).parent().prev().prev().prev().children().val())
     let packing = $(this).parent().prev().children().val()
 
+    // get confirmation price
+    let confirmQuantity = parseInt($(this).parent().next().children().val())
+    let confirmPrice = parseInt($(this).parent().next().next().children().next().val())
+    
     if(kg_quantity === undefined) {
         kg_quantity = 0;
     }
+
+    confirmQuantity = setDefaultValue(confirmQuantity)
+    confirmPrice = setDefaultValue(confirmPrice);
 
     let modifyobj = {
         name : name,
@@ -256,8 +279,17 @@ $('#calculatorT_tbody').on('click','.savebtn', function () {
         unitPrice : unitPrice,
         marginRate : marginRate,
     }
+
+    let userConfirm = {
+        submitNum : itemNum,
+        name : name,
+        confirmQuantity : confirmQuantity,
+        confirmPrice : confirmPrice
+    }
+
     let changeInfo = [index, itemNum, modifyobj];
     ipcRenderer.send('modify-product',changeInfo)
+    ipcRenderer.send('add-userConfirm', userConfirm)
 })
 
 // send the submitNum for delete

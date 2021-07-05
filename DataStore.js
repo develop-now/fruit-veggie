@@ -5,6 +5,7 @@ const Store = require('electron-store')
 class DataStore extends Store {
 
     constructor (settings) {
+
         super(settings)
         this.products = this.get('products') || []
     }
@@ -17,7 +18,6 @@ class DataStore extends Store {
     saveProducts () {
         console.log('this is saveProducts')
         this.set('products', this.products)
-        console.log(`this = ${JSON.stringify(this)}`)
         return this
     }
 
@@ -48,8 +48,6 @@ class DataStore extends Store {
         let modifyobj = product[2]
         let beforename = beforeProduct[index].name
         
-
-            console.log(`products: ${JSON.stringify(beforeProduct[index])}  \n`)
             if(beforeProduct[index].submitNum === submitNum){
                 beforeProduct[index].name = modifyobj.name
                 beforeProduct[index].quantity = modifyobj.quantity
@@ -91,6 +89,7 @@ class DataStore extends Store {
         this.products = products
         return this.saveProducts()
     }
+    
     
 }
 

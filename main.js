@@ -4,6 +4,7 @@ const { app, ipcMain } = require('electron')
 
 const Window = require('./Window')
 const DataStore = require('./DataStore')
+const ConfirmDataStore = require('./ConfirmDatastore')
 
 require('electron-reload')(__dirname,{
     
@@ -12,6 +13,8 @@ require('electron-reload')(__dirname,{
 })
 
 const productsData = new DataStore({ name: 'Products Main' })
+const confirmData = new ConfirmDataStore({ name: 'Confirmation Products Price' })
+
 let priceWindow
 
 function main () {
@@ -24,17 +27,24 @@ function main () {
     })
 
     mainWindow.once('show', () => {
-        mainWindow.webContents.send('products', productsData.getProducts())
+        const data = [productsData.getProducts(),confirmData.getProducts()]
+        mainWindow.webContents.send('products', data)
     })
 
     // catch the data from renderer process(index.js)
-    ipcMain.on('add-product', function (event, product) {
+    ipcMain.on('add-product', function (event, data) {
+        const product = data[0]
+        const confirm = data[1]
 
         // add and save data to dataStore 
         const updatedProducts = productsData.addProduct(product).products
+        // add and save data to ConfirmDataStore 
+        const updatedConfrimation = confirmData.addProduct(confirm).products
 
+        const data_ = [updatedProducts, updatedConfrimation]
+        
         // send to index.html updatedData
-        mainWindow.webContents.send('products', updatedProducts)
+        mainWindow.webContents.send('products', data_)
 
     })
     
@@ -51,8 +61,10 @@ function main () {
     ipcMain.on('delete-product', function (event, deleteInfo) {
     
         const updatedProducts = productsData.deleteProduct(deleteInfo).products
+        const updatedConfrimation = confirmData.deleteProduct(deleteInfo).products
+        const data_ = [updatedProducts, updatedConfrimation]
         
-        mainWindow.webContents.send('products', updatedProducts)
+        mainWindow.webContents.send('products', data_)
     })
 
     ipcMain.on('price-window', function () {
