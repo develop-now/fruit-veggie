@@ -3,19 +3,29 @@
 const DataStore = require('./DataStore')
 
 class ConfirmDataStore extends DataStore {
-
-    updateConfirm (confirm) {
-        console.log(JSON.stringify(confirm))
-
-        if(confirm.confirmQuantity === 0 && confirmPrice === 0) {
-            return this.addProduct()
-        }else if(confirm.confirmQuantity != 0 && confirmPrice != 0) {
-            return this.modifyProduct(confirm)
-        }
-    }
-
+    
     modifyProduct(confirm) {
-        return
+
+        let confirmations = this.getProducts()
+        let index = confirm.index
+        if(confirm.name === confirmations[index].name && confirm.confirmQuantity === 0 && confirm.confirmPrice === 0) {
+            return
+            }
+            
+            confirmations[index].confirmQuantity = confirm.confirmQuantity
+            confirmations[index].confirmPrice = confirm.confirmPrice
+            
+            this.products = confirmations
+
+        if(confirm.name !== confirmations[index].name){
+
+            confirmations[index].name = confirm.name
+            this.products = confirmations
+
+            return this.sortProducts()
+        }
+        
+        return this.saveProducts()
     }
 }
 

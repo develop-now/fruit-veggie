@@ -280,7 +280,8 @@ $('#calculatorT_tbody').on('click','.savebtn', function () {
         marginRate : marginRate,
     }
 
-    let userConfirm = {
+    let userConfirmation = {
+        index : index,
         submitNum : itemNum,
         name : name,
         confirmQuantity : confirmQuantity,
@@ -288,8 +289,8 @@ $('#calculatorT_tbody').on('click','.savebtn', function () {
     }
 
     let changeInfo = [index, itemNum, modifyobj];
-    ipcRenderer.send('modify-product',changeInfo)
-    ipcRenderer.send('add-userConfirm', userConfirm)
+    let data = [changeInfo, userConfirmation]
+    ipcRenderer.send('modify-product', data)
 })
 
 // send the submitNum for delete

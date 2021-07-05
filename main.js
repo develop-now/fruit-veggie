@@ -49,13 +49,19 @@ function main () {
     })
     
     // catch the modfied data from renderer process(index.js)
-    ipcMain.on('modify-product', function (event, product) {
-        
-        // modify and save data to dataStore
-        const modifiedProducts = productsData.modifyProduct(product).products
+    ipcMain.on('modify-product', function (event, data) {
+        const product = data[0]
+        const userConfirmation = data[1]
+        if(submitNumMatchCheck()){
+            
+            // modify and save data to dataStore
+            const modifiedProducts = productsData.modifyProduct(product).products
+            const modifiedConfirmation = confirmData.modifyProduct(userConfirmation).products
+            const data_ = [modifiedProducts, modifiedConfirmation]
 
-        // send to index.html modifiedData
-        mainWindow.webContents.send('products', modifiedProducts)
+            // send to index.html modifiedData
+            mainWindow.webContents.send('products', data_)
+        }
     })
 
     ipcMain.on('delete-product', function (event, deleteInfo) {
@@ -63,7 +69,7 @@ function main () {
         const updatedProducts = productsData.deleteProduct(deleteInfo).products
         const updatedConfrimation = confirmData.deleteProduct(deleteInfo).products
         const data_ = [updatedProducts, updatedConfrimation]
-        
+
         mainWindow.webContents.send('products', data_)
     })
 
@@ -89,6 +95,27 @@ function main () {
         }
     })
 
+}
+
+// index of submitNum match check
+function submitNumMatchCheck () {
+    const products = productsData.getProducts()
+    const confirmations = confirmData.getProducts()
+    let matching = true 
+    let arr = 0
+
+    if(products.length === confirmations.length) {
+
+        while(arr < products.length) {
+            if(products[arr].submitNum !== confirmations[arr].submitNum ) {
+                matching = false
+                console.log("submitNum does not match")
+                break;
+            }
+            arr++
+        }
+    } 
+    return matching
 }
 
 app.on('ready', main)
