@@ -12,6 +12,15 @@ ipcRenderer.on('confirm-Price', function (event, data) {
     console.log('confirm' + JSON.stringify(confirmations))
     let html = ''
     confirmations.forEach(function (confirmation, index, confirmations) {
+        let comfirmPrice = confirmation.confirmPrice.toString()
+        
+        if( comfirmPrice.length > 3 ) {
+            const confirmPriceReverse = comfirmPrice.split('').reverse()
+            confirmPriceReverse.splice(3,0,',')
+            const confirmPriceComma = confirmPriceReverse.reverse().join('')
+            comfirmPrice = confirmPriceComma
+        }
+
         if(index%2 === 0){
             html +=`<tr class="tr_bg"><td>${index+1}</td>`
         }else {
@@ -25,7 +34,7 @@ ipcRenderer.on('confirm-Price', function (event, data) {
                 html += `개`
             }
         html +=`</td>`
-            +`<td><span>${confirmation.confirmPrice}</span>&nbsp;원</td>`
+            +`<td><span>${comfirmPrice}</span>&nbsp;원</td>`
             +`<tr>`
     })
     
