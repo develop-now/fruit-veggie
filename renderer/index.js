@@ -137,6 +137,17 @@ $("form").on('submit', function (e) {
     
 })
 
+// set Date 
+const dateTag = document.getElementById('date')
+const date = new Date()
+const year = date.getFullYear()
+const month = date.getMonth()+1
+const date_ = date.getDate()
+let html = `${year}년 ${month}월 ${date_}일`
+
+dateTag.innerHTML = html
+
+// set submitted datas to table
 ipcRenderer.on('products', function (event, data_) {
     let products = data_[0]
     let confirmations = data_[1]
