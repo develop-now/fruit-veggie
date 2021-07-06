@@ -14,10 +14,8 @@ class ConfirmDataStore extends DataStore {
         confirmations[index].confirmQuantity = confirm.confirmQuantity
         confirmations[index].confirmPrice = confirm.confirmPrice
         
-        console.log(' before' + this.products)
         this.products = confirmations
         
-        console.log(' after' + this.products)
         if(confirm.name !== confirmations[index].name){
             
             confirmations[index].name = confirm.name
