@@ -29,11 +29,12 @@ table.table-bordered{
     margin-top:20px;
     vertical-align: middle;
 }
-table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
+table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td {
     border-left:1px solid #00bfff;
     border-right: 1px solid #00bfff;
     padding:0;
     vertical-align: middle;
+    text-align: center;
 }
 .calculatorT tr {
     text-align: center;
