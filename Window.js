@@ -12,7 +12,7 @@ class Window extends BrowserWindow {
     constructor ({ file, ...windowSettings }) {
         super({ ...defaultSetting, ...windowSettings})
         this.loadFile(file)
-        this.webContents.openDevTools() 
+        //this.webContents.openDevTools() 
         this.once('ready-to-show', () => {
             this.show()
         }) 

@@ -6,11 +6,12 @@ const Window = require('./Window')
 const DataStore = require('./DataStore')
 const ConfirmDataStore = require('./ConfirmDatastore')
 
-require('electron-reload')(__dirname,{
+// reload window when main.js changed
+/* require('electron-reload')(__dirname,{
     
     electron: require(`${__dirname}/node_modules/electron`)
 
-})
+}) */
 
 const productsData = new DataStore({ name: 'Products Main' })
 const confirmData = new ConfirmDataStore({ name: 'Confirmation Products Price' })
