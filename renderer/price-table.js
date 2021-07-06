@@ -9,8 +9,8 @@ ipcRenderer.on('confirm-Price', function (event, data) {
     const products = data[0]
     const confirmations = data[1]
     const priceTbody = document.getElementById('priceT_tbody')
-    console.log('confirm' + JSON.stringify(confirmations))
     let html = ''
+    
     confirmations.forEach(function (confirmation, index, confirmations) {
         let comfirmPrice = confirmation.confirmPrice.toString()
         
