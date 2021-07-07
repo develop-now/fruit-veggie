@@ -4,7 +4,7 @@ const { app, ipcMain } = require('electron')
 
 const Window = require('./Window')
 const DataStore = require('./DataStore')
-const ConfirmDataStore = require('./ConfirmDatastore')
+const ConfirmDataStore = require('./ConfirmDataStore')
 
 // reload window when main.js changed
 /* require('electron-reload')(__dirname,{
