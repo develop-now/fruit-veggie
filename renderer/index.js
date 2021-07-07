@@ -206,9 +206,10 @@ ipcRenderer.on('products', function (event, data_) {
             }
 
             html += `<td class="userCheck">`
-                    + `<input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">`
+                    //+ `<input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">`
                     + `<input type="number" value="${confirmData.confirmPrice}" style="width:55px; margin-bottom:1px;">`
-                    + `<input class="px-0 py-0" type="button" value="+" style="font-size: 12px"></td>`
+                    //+ `<input class="px-0 py-0" type="button" value="+" style="font-size: 12px">`
+                    + `</td>`
                     
             if(product.box === 'true' && product.box_kg != 0) {
                 if(product.packing === 'true'){
@@ -283,7 +284,7 @@ $('#calculatorT_tbody').on('click','.savebtn', function () {
 
     // get confirmation price
     let confirmQuantity = parseInt($(this).parent().next().children().val())
-    let confirmPrice = parseInt($(this).parent().next().next().children().next().val())
+    let confirmPrice = parseInt($(this).parent().next().next().children().val())
     
     if(kg_quantity === undefined) {
         kg_quantity = 0;
