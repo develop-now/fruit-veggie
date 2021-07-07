@@ -5,15 +5,18 @@
   "main": "main.js",
   "dependencies": {
     "bootstrap": "^4.6.0",
-    "electron": "^13.1.2",
     "electron-reload": "^1.5.0",
     "electron-store": "^8.0.0",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "electron": "^13.1.2",
+    "electron-builder": "^22.11.7"
+  },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "deploy": "electron-builder --windows nsis:x64"
   },
   "repository": {
     "type": "git",
@@ -24,5 +27,32 @@
   "bugs": {
     "url": "https://github.com/develop-now/fruit-veggie/issues"
   },
-  "homepage": "https://github.com/develop-now/fruit-veggie#readme"
+  "homepage": "https://github.com/develop-now/fruit-veggie#readme",
+  "build": {
+    "productName": "FruitAndVeggie",
+    "appId": "com.electron.calculator",
+    "asar": true,
+    "protocols": {
+      "name": "fruitandveggie",
+      "schemes": [
+        "fruitandveggie"
+      ]
+    },
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
+      "icon": "./resources/installer/Icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "buildResources": "./resources/installer/",
+      "output": "./dist/",
+      "app": "."
+    }
+  }
 }
