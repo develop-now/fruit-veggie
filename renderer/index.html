@@ -32,11 +32,22 @@
                                 </label>
                             </div>
                             <div class="mx-2 boxCheked">
-                                <input type="number" class="numTextBox boxCheck" name="box_kg">kg
+                                <label>
+                                    <input type="radio" class="big-check" name="saleWay" value="gram">그램판매
+                                </label>
                             </div>
                             <div class="mx-2 boxCheked">
+                                <label>
+                                    <input type="radio" class="big-check" name="saleWay" value="quantity">개수판매
+                                </label>
+                            </div>
+                            <div class="mx-2 boxCheck boxGram">
+                                한 박스 무게:
+                                <input type="number" class="numTextBox" name="box_kg">kg
+                            </div>
+                            <div class="mx-2 boxCheck boxQauntity">
                                 한 박스당 수량:
-                                <input type="number" class="numTextBox boxCheck" name="quantityByOneBox">개
+                                <input type="number" class="numTextBox" name="quantityByOneBox">개
                             </div>
                             <div class="mx-2">
                                 <label>

@@ -52,12 +52,17 @@ $(".big-checkbox").on('click', function () {
     this.value = checkboxVal(value);
 });
 
+// change states accoding to the box checked
 $("input[name=box]").on('click', function () {
     if(this.value === 'true'){
         $(".boxCheked").css('display', 'block')
     }else{
         $(".boxCheked").css('display', 'none')
-        $(".boxCheck").val('')
+        $(".boxCheck").css('display', 'none')
+        $(".boxCheck").children().val('')
+        $("input[name=saleWay]").prop('checked', false)
+        $("input[name=box_kg]").prop("required",false)
+        $("input[name=quantityByOneBox]").prop("required",false)
     }
 })
 
@@ -87,9 +92,46 @@ function setDefaultValue (value) {
     return value_
 }
 
+// change states accoding to the slaeWay radios checked
+$('input[name=saleWay]').on('click', function () {
+    let checkedValue = $("input[name=saleWay]:checked").val()
+    
+    if(checkedValue === "gram") {
+        $(".boxQauntity").css("display", "none")
+        $("input[name=quantityByOneBox]").prop("required",false)
+        $(".boxGram").css("display", "block")
+        $("input[name=box_kg]").prop("required",true)
+    }
+    if(checkedValue === "quantity") {
+        $("input[name=box_kg]").prop("required",false)
+        $(".boxGram").css("display", "none")
+        $(".boxQauntity").css("display", "block")
+        $("input[name=quantityByOneBox]").prop("required",true)
+    }
+})
+
+// check required values when checking the radio
+function radioValueCheck () {
+    let boxState = $("input[name=box]").val();
+    let boxWayCheck = $("input[name=saleWay]").is(":checked")
+    let result = 1
+    if (boxState === 'false') {
+        return result
+    }
+    if (!boxWayCheck) {
+        console.log(boxWayCheck)
+        alert('g으로 판매하는 상품: 그램판매\n개수로 판매하는 상품: 개수판매를 선택하시오\n*해당사항이 없을경우: 박스입고체크를 해제하시오')
+        result = 0
+        return result
+    }
+} 
+
 $("form").on('submit', function (e) {
     e.preventDefault();
 
+    if (radioValueCheck() === 0) {
+        return
+    }
     // get and set value to object
     const submitNum = parseInt($('input[name=submitNum]').val())
     const name = $('input[name=name]').val()
