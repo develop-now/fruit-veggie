@@ -213,17 +213,17 @@ ipcRenderer.on('products', function (event, data_) {
                     
             if(product.box === 'true' && product.box_kg != 0) {
                 if(product.packing === 'true'){
-                    html += `<td class="priceCol">${Math.floor(1000*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(1500*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(2000*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(2500*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(3000*10/byGram)*10}g</td>`
-                }else {
                     html += `<td class="priceCol">${Math.floor(900*10/byGram)*10}g</td>`
                     + `<td class="priceCol">${Math.floor(1400*10/byGram)*10}g</td>`
                     + `<td class="priceCol">${Math.floor(1900*10/byGram)*10}g</td>`
                     + `<td class="priceCol">${Math.floor(2400*10/byGram)*10}g</td>`
                     + `<td class="priceCol">${Math.floor(2900*10/byGram)*10}g</td>`
+                }else {
+                    html += `<td class="priceCol">${Math.floor(1000*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(1500*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(2000*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(2500*10/byGram)*10}g</td>`
+                    + `<td class="priceCol">${Math.floor(3000*10/byGram)*10}g</td>`
                 }
             }else if(product.box === 'true' && product.quantityByOneBox != 0) {
                 if(product.packing === 'true') {
