@@ -159,8 +159,8 @@ ipcRenderer.on('products', function (event, data_) {
         products.forEach(function (product, index, products) {
             let confirmData = confirmations[index]
             let marginPrice = Math.floor(product.unitPrice*(product.marginRate*0.01)+product.unitPrice)
-            let byGram = Math.floor(marginPrice/product.box_kg*0.1)
-            let byQuantity = Math.floor(marginPrice/product.quantityByOneBox)
+            let byGram = Math.ceil(marginPrice/product.box_kg*0.1)
+            let byQuantity = Math.ceil(marginPrice/product.quantityByOneBox)
 
             html += `<input type="hidden" class="num" value="${index+1}">`
                     + `<input type="hidden" class="num" value="${product.submitNum}">`
