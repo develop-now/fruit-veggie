@@ -2,9 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=3.0">
-        <title>Main page</title>
-        <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+        <!-- 
+            <meta name="viewport" content="width=device-width, initial-scale=3.0">
+        -->
+        <title>단가계산</title>
+        <!-- 
+            <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+         -->
         <link rel="stylesheet" href="style.css">
         <script>window.$ = window.jQuery = require('jquery');</script> 
         <style>
@@ -12,122 +16,117 @@
         </style>
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="row pt-4">
-                <div class="col mb-5">
-                    <form>
+        <div class="container">
+            <div class="topMenu">
+                    <form class="topMenuForm">
                         <input type="hidden" name="submitNum">
-                        <div class="d-flex flex-row justify-content-center bg-light py-2 border border-info tobMenu">
-                            <div  class="mx-2">
-                            품목명:
-                            <input type="text" name="name" style="width:150px" required>
-                            </div>
-                            <div class="mx-2">
-                                수량:
-                                <input type="number" class="numTextBox" name="quantity" required>
-                            </div>
-                            <div class="mx-2">
-                                <label>
-                                    <input type="checkbox" class="big-checkbox" name="box" value="false">&nbsp;박스입고
-                                </label>
-                            </div>
-                            <div class="mx-2 boxCheked">
-                                <label>
-                                    <input type="radio" class="big-check" name="saleWay" value="gram">그램판매
-                                </label>
-                            </div>
-                            <div class="mx-2 boxCheked">
-                                <label>
-                                    <input type="radio" class="big-check" name="saleWay" value="quantity">개수판매
-                                </label>
-                            </div>
-                            <div class="mx-2 boxCheck boxGram">
-                                한 박스 무게:
-                                <input type="number" class="numTextBox" name="box_kg">kg
-                            </div>
-                            <div class="mx-2 boxCheck boxQauntity">
-                                한 박스당 수량:
-                                <input type="number" class="numTextBox" name="quantityByOneBox">개
-                            </div>
-                            <div class="mx-2">
-                                <label>
-                                    <input type="checkbox" class="big-checkbox" name="packing" value="false" >&nbsp;포장유무
-                                </label>
-                            </div>
-                            <div class="mx-2">
-                                단가:
-                                <input type="number" class="numTextBox" name="unitPrice" style="width:60px">원
-                            </div>
-                            <div class="mx-2">
-                                마진률:
-                                <input type="number" name="marginRate" value="25" style="width: 40px" required>%
-                            </div>
-                            <div class="mx-2">
-                                <input type="submit"  class="bg-info btn" value="추가">
-                            </div>
-                        </div>
-                    </form>
-                    <div class="container-fluid px-0">
-                        <div class="col mx-auto">
-                            <h4 class="d-flex my-4 justify-content-center font-weight-normal" id="date">
-                                2021/06/20
-                            </h4>
-                        </div>
-                        <div class="col px-0 calculatorT">
-                            <table class="table table-bordered table-hover">
-                                <colgroup>
-                                    <col style="width:2%">
-                                    <col style="width:14%">
-                                    <col style="width:4%">
-                                    <col style="width:9%">
-                                    <col style="width:5%">
-                                    <col style="width:9%">
-                                    <col style="width:9%">
-                                    <col style="width:4%">
-                                    <col style="width:3%">
-                                    <col style="width:5%">
-                                    <col style="width:8%">
-                                    <col style="width:6%">
-                                    <col style="width:5%">
-                                    <col style="width:5%">
-                                    <col style="width:5%">
-                                    <col style="width:5%">
-                                </colgroup>
-                                <thead>
-                                    <tr class="table-info">
-                                        <th>No</th>
-                                        <th>품목</th>
-                                        <th>수량</th>
-                                        <th>1박스당 수량<br>/1박스 kg</th>
-                                        <th>단가</th>
-                                        <th>마진추가</th>
-                                        <th>1개&#40;100g&#41;당</th>
-                                        <th>포장</th>
-                                        <th></th>
-                                        <th>개수/g</th>
-                                        <th>판매금액</th>
-                                        <th>1,000&#40;g&#41;<br>/1개&#40;원&#41;</th>
-                                        <th>1,500<br>/2개</th>
-                                        <th>2,000<br>/3개</th>
-                                        <th>2,500<br>/4개</th>
-                                        <th>3,000<br>/5개</th>
-                                        <th></th>
-                                        <input type="hidden" class="num" value="0">
-                                    </tr>
-                                </thead>
-                                <tbody id="calculatorT_tbody">
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <div>
-                            <button class="btn btn-info float-right" id="priceT">판매표 확인하기</button>
-                        </div>
+                    <div>
+                    품목명:
+                    <input type="text" name="name" style="width:150px" required>
                     </div>
+                    <div>
+                        수량:
+                        <input type="number" class="numTextBox" name="quantity" required>
+                    </div>
+                    <div class="boxBackColor">
+                        <label>
+                            <input type="checkbox" class="big-checkbox" name="box" value="false">&nbsp;박스입고
+                        </label>
+                    </div>
+                    <div class="boxCheked boxBackColor">
+                        <label>
+                            <input type="radio" class="big-check" name="saleWay" value="gram">그램판매
+                        </label>
+                    </div>
+                    <div class="boxCheked boxBackColor">
+                        <label>
+                            <input type="radio" class="big-check" name="saleWay" value="quantity">개수판매
+                        </label>
+                    </div>
+                    <div class="boxCheck boxGram boxBackColor">
+                        한박스무게:
+                        <input type="number" class="numTextBox" name="box_kg">kg
+                    </div>
+                    <div class="boxCheck boxQauntity boxBackColor">
+                        한박스당수량:
+                        <input type="number" class="numTextBox" name="quantityByOneBox">개
+                    </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" class="big-checkbox" name="packing" value="false" >&nbsp;포장유무
+                        </label>
+                    </div>
+                    <div>
+                        단가:
+                        <input type="number" class="numTextBox" name="unitPrice" style="width:60px">원
+                    </div>
+                    <div>
+                        마진률:
+                        <input type="number" name="marginRate" value="25" style="width: 25px" required>%
+                    </div>
+                    <div>
+                        <input type="submit"  class="bg-info btn" value="추가">
+                    </div>
+                </form>
+            </div>
+            <div class="container-fluid px-0">
+                <div class="col mx-auto">
+                    <h4 class="d-flex my-4 justify-content-center font-weight-normal" id="date">
+                        2021/06/20
+                    </h4>
+                </div>
+                <div class="col px-0 calculatorT">
+                    <table class="table table-bordered table-hover">
+                        <colgroup>
+                            <col style="width:2%">
+                            <col style="width:14%">
+                            <col style="width:4%">
+                            <col style="width:9%">
+                            <col style="width:5%">
+                            <col style="width:9%">
+                            <col style="width:9%">
+                            <col style="width:4%">
+                            <col style="width:3%">
+                            <col style="width:5%">
+                            <col style="width:8%">
+                            <col style="width:6%">
+                            <col style="width:5%">
+                            <col style="width:5%">
+                            <col style="width:5%">
+                            <col style="width:5%">
+                        </colgroup>
+                        <thead>
+                            <tr class="table-info">
+                                <th>No</th>
+                                <th>품목</th>
+                                <th>수량</th>
+                                <th>1박스당 수량<br>/1박스 kg</th>
+                                <th>단가</th>
+                                <th>마진추가</th>
+                                <th>1개&#40;100g&#41;당</th>
+                                <th>포장</th>
+                                <th></th>
+                                <th>개수/g</th>
+                                <th>판매금액</th>
+                                <th>1,000&#40;g&#41;<br>/1개&#40;원&#41;</th>
+                                <th>1,500<br>/2개</th>
+                                <th>2,000<br>/3개</th>
+                                <th>2,500<br>/4개</th>
+                                <th>3,000<br>/5개</th>
+                                <th></th>
+                                <input type="hidden" class="num" value="0">
+                            </tr>
+                        </thead>
+                        <tbody id="calculatorT_tbody">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <button class="btn btn-info float-right" id="priceT">판매표 확인하기</button>
                 </div>
             </div>
         </div>
-
         <script src="./index.js"></script>
     </body>
 </html>

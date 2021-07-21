@@ -56,7 +56,9 @@ $(".big-checkbox").on('click', function () {
 $("input[name=box]").on('click', function () {
     if(this.value === 'true'){
         $(".boxCheked").css('display', 'block')
+        $(".boxBackColor").css('backgroundColor','rgb(216 190 190 / 46%)')
     }else{
+        $(".boxBackColor").css('backgroundColor','#faf2f1')
         $(".boxCheked").css('display', 'none')
         $(".boxCheck").css('display', 'none')
         $(".boxCheck").children().val('')
