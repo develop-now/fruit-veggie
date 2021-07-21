@@ -5,7 +5,7 @@ input[type=number]::-webkit-outer-spin-button {
 .topMenu {
     display: flex;
     justify-content: center;
-    border: solid 1.7px #a0d6db;
+    border: 1.7px solid #a0d6db;
     width: 100%;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -45,30 +45,68 @@ input[type=number]::-webkit-outer-spin-button {
     position: relative;
     top: 4px;
 }
-.btn {
+.btn, .savebtn, .deletebtn{
     border: solid 1px;
     border-radius: 4px;
     color: white;
+}
+.btn, .savebtn{
     background-color: #33b4db;
 }
-table.table-bordered{
+.deletebtn {
+    background-color: #e23636;
+}
+.savebtn, .deletebtn {
+    padding: 5px 0 5px 0;
+}
+.btn:hover, .savebtn:hover{
+    background-color: #2a90af;
+}
+.deletebtn:hover {
+    background-color: #9c2323;
+}
+.btn:hover, .savebtn:hover, .deletebtn:hover {
+    cursor: pointer;
+}
+.dateBox {
+    display: flex;
+    justify-content: center;
+}
+table.calculatorTable{
     border-left:1px solid #00bfff;
     border-right: 1px solid #00bfff;
-    margin-top:20px;
     vertical-align: middle;
 }
-table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td {
+table.calculatorTable > thead > tr > th, table.calculatorTable > tbody > tr > td {
     border-left:1px solid #00bfff;
     border-right: 1px solid #00bfff;
-    padding:0;
     vertical-align: middle;
     text-align: center;
+}
+.calculatorTable > thead > tr {
+    color: #402f2f
+} 
+.calculatorTable {
+    border-collapse: collapse;
+}
+.calculatorTable > thead > tr > th { 
+    background-color:#33b4db6e;
+    padding: 3px 0 3px 0;
+}
+.calculatorTable td { 
+    background-color:#f8f8f8;
+    border-bottom: 2px solid #f4f4f4;
+    padding: 4px 0 4px 0;
+}
+.calculatorTable :nth-child(3) {
+    border-top: 2px solid #f4f4f4;
 }
 .calculatorT tr {
     text-align: center;
 }
 .calculatorT tr input[type=text], .calculatorT tr input[type=number]{
     border:solid 1px #ebe7e7;
+    font-size: 16px;
 }
 .calculatorT tr input[type=number] {
     text-align: right;
@@ -76,15 +114,23 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td {
 .calculatorT tr input[type=text] {
     text-align: center;
 }
+.productInfoName {
+    font-size: 16px;
+    font-weight: bold;
+}
+.marginFont {
+    font-weight: bold;
+}
 .table-hover tr:hover td {
-    border-bottom:solid 2px rgb(2, 27, 255);
+    border-bottom: solid 2px cornflowerblue;
     border-top: solid 1px #00bfff !important;
+    background-color: #f6f0f0;
 }
 .userCheck {
-    background-color: #61aff76e;
+    background-color: #61aff76e !important;
 }
 .priceCol {
-    background-color: rgb(251 251 30 / 63%);
+    background-color: rgb(251 251 30 / 63%) !important;
 }
 .lightText {
     color:gray
@@ -94,6 +140,12 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td {
 }
 .boxCheck {
     display: none;
+}
+.pricebtn {
+    float: right;
+    font-size: 16px;
+    padding: 8px 16px 8px 16px;
+    margin: 5px 10px 5px 10px;
 }
 
 /* price table */

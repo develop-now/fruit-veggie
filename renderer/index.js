@@ -209,7 +209,7 @@ ipcRenderer.on('products', function (event, data_) {
             html += `<input type="hidden" class="num" value="${index+1}">`
                     + `<input type="hidden" class="num" value="${product.submitNum}">`
                     + `<tr><td>${index + 1}<input type="hidden" class="num" value="${product.submitNum}"></td>`
-                    + `<td><input type="text" class="productInfo" name="name" value="${product.name}"></td>`
+                    + `<td><input type="text" class="productInfo productInfoName" name="name" value="${product.name}"></td>`
                     + `<td><input type="number" class="productInfo" name="quantity" value="${product.quantity}" style="width:35px"></td>`
             
             if(product.box ==='true' && product.box_kg != 0) {
@@ -221,8 +221,8 @@ ipcRenderer.on('products', function (event, data_) {
             }
 
             html += `<td><input type="number" class="productInfo" name="unitPrice" value="${product.unitPrice}" style="width:53px"</td>`
-                    + `<td>${marginPrice}&nbsp;&#47;`
-                    + `<input type="number" class="productInfo" name="marginRate" value="${product.marginRate}" style="width:28px"><span class="lightText">%<span>`
+                    + `<td class="marginFont">${marginPrice}&nbsp;&#47;`
+                    + `<input type="number" class="productInfo" name="marginRate" value="${product.marginRate}" style="width:17px"><span class="lightText">%<span>`
                     + `</td>`
             
             if(product.box === 'true' && product.quantityByOneBox != 0) {
@@ -239,9 +239,9 @@ ipcRenderer.on('products', function (event, data_) {
                 html += `<td><input type="checkbox" class="productInfo infoCheckbox" name="packing" value="false" ></td>`
             }
 
-            html += `<td><input type="button" class="btn-info btn px-0 savebtn" style="font-size:13px"value="저장"></td>`
+            html += `<td><input type="button" class="savebtn" style="font-size:13px"value="저장"></td>`
                     + `<td class="userCheck">`
-                    + `<input type="number" value="${confirmData.confirmQuantity}" style="width:35px; margin-bottom:1px;">`
+                    + `<input type="number" value="${confirmData.confirmQuantity}" style="width:35px; margin-bottom:1px;"><span class="lightText">`
 
             if(product.box_kg != 0) {
                 html += `g`
@@ -249,7 +249,7 @@ ipcRenderer.on('products', function (event, data_) {
                 html += `개`
             }
 
-            html += `<td class="userCheck">`
+            html += `</span></td><td class="userCheck">`
                     //+ `<input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">`
                     + `<input type="number" value="${confirmData.confirmPrice}" style="width:55px; margin-bottom:1px;">`
                     //+ `<input class="px-0 py-0" type="button" value="+" style="font-size: 12px">`
@@ -299,7 +299,7 @@ ipcRenderer.on('products', function (event, data_) {
                     + `<td class="priceCol">${marginPrice*5}</td>`
                 }
             }
-                html += `<td><input type="button" class="btn-danger btn px-0 deletebtn" value="삭제"></td></tr>` 
+                html += `<td><input type="button" class="deletebtn" value="삭제"></td></tr>` 
             
             })
         }
