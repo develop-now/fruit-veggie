@@ -75,52 +75,40 @@
                         2021/06/20
                     </h3>
                 </div>
-                <div class="calculatorT">
-                    <table class="table-hover calculatorTable">
-                        <colgroup>
-                            <col style="width:2%">
-                            <col style="width:14%">
-                            <col style="width:4%">
-                            <col style="width:9%">
-                            <col style="width:5%">
-                            <col style="width:9%">
-                            <col style="width:9%">
-                            <col style="width:4%">
-                            <col style="width:3%">
-                            <col style="width:5%">
-                            <col style="width:8%">
-                            <col style="width:6%">
-                            <col style="width:5%">
-                            <col style="width:5%">
-                            <col style="width:5%">
-                            <col style="width:5%">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>품목</th>
-                                <th>수량</th>
-                                <th>1박스당 수량<br>/1박스 kg</th>
-                                <th>단가</th>
-                                <th>마진추가</th>
-                                <th>1개&#40;100g&#41;당</th>
-                                <th>포장</th>
-                                <th></th>
-                                <th>개수/g</th>
-                                <th>판매금액</th>
-                                <th>1,000&#40;g&#41;<br>/1개&#40;원&#41;</th>
-                                <th>1,500<br>/2개</th>
-                                <th>2,000<br>/3개</th>
-                                <th>2,500<br>/4개</th>
-                                <th>3,000<br>/5개</th>
-                                <th></th>
-                                <input type="hidden" class="num" value="0">
-                            </tr>
-                        </thead>
-                        <tbody id="calculatorT_tbody">
+                <div class="innerBottomT">
 
-                        </tbody>
-                    </table>
+                    <div class="fixed_table_container">
+                            <div class="header_bg"></div>
+                            <div class="calculatorT">
+                                <table class="table-hover calculatorTable">
+                                    <thead class="calculatorT_thead">
+                                        <tr>
+                                            <th width="2%"><div class="th_text">No<div/></th>
+                                            <th width="217px"><div class="th_text">품목<div/></th>
+                                            <th width="3%"><div class="th_text">수량<div/></th>
+                                            <th width="6%"><div class="th_text">1박스당<br>수량/kg<div/></th>
+                                            <th width="5%"><div class="th_text">단가<div/></th>
+                                            <th width="9%"><div class="th_text">마진추가<div/></th>
+                                            <th width="9%"><div class="th_text">1개&#40;100g&#41;당<div/></th>
+                                            <th width="4%"><div class="th_text">포장<div/></th>
+                                            <th width="3%"><div class="th_text">&nbsp;<div/></th>
+                                            <th width="5%"><div class="th_text">개수/g<div/></th>
+                                            <th width="8%"><div class="th_text">판매금액<div/></th>
+                                            <th width="6%"><div class="th_text">1,000&#40;g&#41;<br>/1개&#40;원&#41;<div/></th>
+                                            <th width="5%"><div class="th_text">1,500<br>/2개<div/></th>
+                                            <th width="5%"><div class="th_text">2,000<br>/3개<div/></th>
+                                            <th width="5%"><div class="th_text">2,500<br>/4개<div/></th>
+                                            <th width="5%"><div class="th_text">3,000<br>/5개<div/></th>
+                                            <th width="%"><div class="th_text"><div/></th>
+                                                <input type="hidden" class="num" value="0">
+                                            </tr>
+                                        </thead>
+                                    <tbody id="calculatorT_tbody">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
                 </div>
                 <div>
                     <button class="btn pricebtn" id="priceT">판매표 확인하기</button>

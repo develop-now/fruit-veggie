@@ -210,7 +210,7 @@ ipcRenderer.on('products', function (event, data_) {
                     + `<input type="hidden" class="num" value="${product.submitNum}">`
                     + `<tr><td>${index + 1}<input type="hidden" class="num" value="${product.submitNum}"></td>`
                     + `<td><input type="text" class="productInfo productInfoName" name="name" value="${product.name}"></td>`
-                    + `<td><input type="number" class="productInfo" name="quantity" value="${product.quantity}" style="width:35px"></td>`
+                    + `<td><input type="number" class="productInfo" name="quantity" value="${product.quantity}" style="width:30px"></td>`
             
             if(product.box ==='true' && product.box_kg != 0) {
                 html += `<td><input type="number" class="productInfo" name="box_kg" value="${product.box_kg}" style="width:35px"><span class="lightText">kg<span></td>`
@@ -220,9 +220,9 @@ ipcRenderer.on('products', function (event, data_) {
                 html += `<td>-</td>`
             }
 
-            html += `<td><input type="number" class="productInfo" name="unitPrice" value="${product.unitPrice}" style="width:53px"</td>`
+            html += `<td><input type="number" class="productInfo" name="unitPrice" value="${product.unitPrice}" style="width:50px"</td>`
                     + `<td class="marginFont">${marginPrice}&nbsp;&#47;`
-                    + `<input type="number" class="productInfo" name="marginRate" value="${product.marginRate}" style="width:17px"><span class="lightText">%<span>`
+                    + `<input type="number" class="productInfo" name="marginRate" value="${product.marginRate}" style="width:18px"><span class="lightText">%<span>`
                     + `</td>`
             
             if(product.box === 'true' && product.quantityByOneBox != 0) {
@@ -250,24 +250,24 @@ ipcRenderer.on('products', function (event, data_) {
             }
 
             html += `</span></td><td class="userCheck">`
-                    //+ `<input class="px-0 py-0" type="button" value="-" style="font-size: 12px; width:13px">`
-                    + `<input type="number" value="${confirmData.confirmPrice}" style="width:55px; margin-bottom:1px;">`
-                    //+ `<input class="px-0 py-0" type="button" value="+" style="font-size: 12px">`
+                    + `<input class="addRemove" type="button" value="-">`
+                    + `<input type="number" value="${confirmData.confirmPrice}" style="width:56px; margin-bottom:1px;">`
+                    + `<input class="addRemove" type="button" value="+">`
                     + `</td>`
                     
             if(product.box === 'true' && product.box_kg != 0) {
                 if(product.packing === 'true'){
-                    html += `<td class="priceCol">${Math.floor(900*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(1400*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(1900*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(2400*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(2900*10/byGram)*10}g</td>`
+                    html += `<td class="priceCol">${Math.floor(900*10/byGram)*10}<span class="lightText">g</span></td>`
+                    + `<td class="priceCol">${Math.floor(1400*10/byGram)*10}<span class="lightText">g</span></td>`
+                    + `<td class="priceCol">${Math.floor(1900*10/byGram)*10}<span class="lightText">g</span></td>`
+                    + `<td class="priceCol">${Math.floor(2400*10/byGram)*10}<span class="lightText">g</span></td>`
+                    + `<td class="priceCol">${Math.floor(2900*10/byGram)*10}<span class="lightText">g</span></td>`
                 }else {
-                    html += `<td class="priceCol">${Math.floor(1000*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(1500*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(2000*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(2500*10/byGram)*10}g</td>`
-                    + `<td class="priceCol">${Math.floor(3000*10/byGram)*10}g</td>`
+                    html += `<td class="priceCol">${Math.floor(1000*10/byGram)*10}<span class="lightText">g</span></td>`
+                    + `<td class="priceCol">${Math.floor(1500*10/byGram)*10}<span class="lightText">g</span></td>`
+                    + `<td class="priceCol">${Math.floor(2000*10/byGram)*10}<span class="lightText">g</span></td>`
+                    + `<td class="priceCol">${Math.floor(2500*10/byGram)*10}<span class="lightText">g</span></td>`
+                    + `<td class="priceCol">${Math.floor(3000*10/byGram)*10}<span class="lightText">g</span></td>`
                 }
             }else if(product.box === 'true' && product.quantityByOneBox != 0) {
                 if(product.packing === 'true') {
