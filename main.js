@@ -80,8 +80,8 @@ function main () {
             priceWindow = new Window({
 
                 file: path.join('renderer', 'price-table.html'),
-                width: 500,
-                height: 600,
+                width: 660,
+                height: 690,
                 webPreferences: {
                     nodeIntegration: true,
                     contextIsolation: false
