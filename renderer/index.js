@@ -209,7 +209,7 @@ ipcRenderer.on('products', function (event, data_) {
             html += `<input type="hidden" class="num" value="${index+1}">`
                     + `<input type="hidden" class="num" value="${product.submitNum}">`
                     + `<tr><td>${index + 1}<input type="hidden" class="num" value="${product.submitNum}"></td>`
-                    + `<td><input type="text" class="productInfo productInfoName" name="name" value="${product.name}"></td>`
+                    + `<td><input type="text" class="productInfo productInfoName" name="name" value="${product.name}" style="width:180px"></td>`
                     + `<td><input type="number" class="productInfo" name="quantity" value="${product.quantity}" style="width:30px"></td>`
             
             if(product.box ==='true' && product.box_kg != 0) {
@@ -220,7 +220,7 @@ ipcRenderer.on('products', function (event, data_) {
                 html += `<td>-</td>`
             }
 
-            html += `<td><input type="number" class="productInfo" name="unitPrice" value="${product.unitPrice}" style="width:50px"</td>`
+            html += `<td><input type="number" class="productInfo" name="unitPrice" value="${product.unitPrice}" style="width:53px"</td>`
                     + `<td class="marginFont">${marginPrice}&nbsp;&#47;`
                     + `<input type="number" class="productInfo" name="marginRate" value="${product.marginRate}" style="width:18px"><span class="lightText">%<span>`
                     + `</td>`
