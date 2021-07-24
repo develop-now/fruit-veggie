@@ -27,14 +27,14 @@ ipcRenderer.on('confirm-Price', function (event, data) {
             html +=`<tr><td>${index+1}</td>`
         }
         html +=`<td><span>${confirmation.name}</span></td>`
-            +`<td><span>${confirmation.confirmQuantity}</span>&nbsp;`
+            +`<td><span>${confirmation.confirmQuantity}</span>&nbsp;<span class="lightText">`
             if(products[index].box_kg !== 0) {
                 html += `g`
             }else {
                 html += `개`
             }
-        html +=`</td>`
-            +`<td><span>${comfirmPrice}</span>&nbsp;원</td>`
+        html +=`</span></td>`
+            +`<td><span>${comfirmPrice}</span>&nbsp;<span class="lightText">원</span></td>`
             +`<tr>`
     })
     
