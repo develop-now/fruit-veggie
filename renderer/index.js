@@ -1,8 +1,5 @@
 'use strict'
 
-//window.popper = require('popper.js')
-//require('bootstrap')
-
 const { ipcRenderer } = require('electron')
 
 let randomNum = 0;

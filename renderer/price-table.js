@@ -1,8 +1,5 @@
 'use strict'
 
-//window.popper = require('popper.js') 
-//require('bootstrap')
-
 const { ipcRenderer } = require("electron")
 
 ipcRenderer.on('confirm-Price', function (event, data) {
