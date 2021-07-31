@@ -32,35 +32,28 @@ function main () {
         mainWindow.webContents.send('products', data)
     })
 
-    // catch the data from renderer process(index.js)
     ipcMain.on('add-product', function (event, data) {
         const product = data[0]
         const confirm = data[1]
 
-        // add and save data to dataStore 
-        const updatedProducts = productsData.add(product).products
-        // add and save data to ConfirmDataStore 
+        const updatedProducts = productsData.add(product).products 
         const updatedConfrimation = confirmData.add(confirm).products
 
         const data_ = [updatedProducts, updatedConfrimation]
         
-        // send to index.html updatedData
         mainWindow.webContents.send('products', data_)
 
     })
     
-    // catch the modfied data from renderer process(index.js)
     ipcMain.on('modify-product', function (event, data) {
         const product = data[0]
         const userConfirmation = data[1]
         if(submitNumMatchCheck()){
             
-            // modify and save data to dataStore
             const modifiedProducts = productsData.modify(product).products
             const modifiedConfirmation = confirmData.modify(userConfirmation).products
             const data_ = [modifiedProducts, modifiedConfirmation]
 
-            // send to index.html modifiedData
             mainWindow.webContents.send('products', data_)
         }
     })
@@ -103,7 +96,6 @@ function main () {
 
 }
 
-// index of submitNum match check
 function submitNumMatchCheck () {
     const products = productsData.getProducts()
     const confirmations = confirmData.getProducts()

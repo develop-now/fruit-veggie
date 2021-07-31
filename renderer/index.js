@@ -6,7 +6,7 @@ let randomNum = 0;
 let hasNumResult = true;
 
 
-// randomNum for product id
+// for product id
 function getRandomNum(min, max) {
     let min_ = Math.ceil(min);
     let max_ = Math.floor(max);
@@ -34,7 +34,6 @@ function hasNum() {
     }
 }
 
-// change value
 function checkboxVal(value) {
     if (value === 'false') {
         return 'true';
@@ -43,13 +42,11 @@ function checkboxVal(value) {
     }
 }
 
-// checked - value: true, unchecked - value: false
 $(".big-checkbox").on('click', function () {
     let value = this.value;
     this.value = checkboxVal(value);
 });
 
-// change states accoding to the box checked
 $("input[name=box]").on('click', function () {
     if(this.value === 'true'){
         $(".boxCheked").css('display', 'block')
@@ -65,11 +62,9 @@ $("input[name=box]").on('click', function () {
     }
 })
 
-// put randomNum to input tag (name="submitNum") in form
 $("input[name=name]").on('click', function () {
     hasNum();
 
-    // if hasNumResult = true, callback hasNum() until hasNumResult = false
     if(hasNumResult) {
 
         while(hasNumResult) {
@@ -81,7 +76,6 @@ $("input[name=name]").on('click', function () {
 
 })
 
-// set Non a Number to 0
 function setDefaultValue (value) {
     let value_ = value
 
@@ -91,7 +85,6 @@ function setDefaultValue (value) {
     return value_
 }
 
-// change states accoding to the slaeWay radios checked
 $('input[name=saleWay]').on('click', function () {
     let checkedValue = $("input[name=saleWay]:checked").val()
     
@@ -109,7 +102,6 @@ $('input[name=saleWay]').on('click', function () {
     }
 })
 
-// check required values when checking the radio
 function radioValueCheck () {
     let boxState = $("input[name=box]").val();
     let boxWayCheck = $("input[name=saleWay]").is(":checked")
@@ -118,7 +110,6 @@ function radioValueCheck () {
         return result
     }
     if (!boxWayCheck) {
-        console.log(boxWayCheck)
         alert('g으로 판매하는 상품: 그램판매\n개수로 판매하는 상품: 개수판매를 선택하시오\n*해당사항이 없을경우: 박스입고체크를 해제하시오')
         result = 0
         return result
@@ -131,7 +122,7 @@ $("form").on('submit', function (e) {
     if (radioValueCheck() === 0) {
         return
     }
-    // get and set value to object
+    
     const submitNum = parseInt($('input[name=submitNum]').val())
     const name = $('input[name=name]').val()
     const box = $('input[name=box]').val()
@@ -156,7 +147,6 @@ $("form").on('submit', function (e) {
         marginRate : marginRate,
     }
 
-    // init user confirmation data with submitNum 
     let userConfirm = {
         submitNum : submitNum,
         name : name,
@@ -165,10 +155,9 @@ $("form").on('submit', function (e) {
     }
     
     let data = [formData , userConfirm]
-    // send submitted data and inited userConfirmation to main process
+
     ipcRenderer.send('add-product', data);
         
-    // init form value
     $(".big-checkbox").prop("checked", false);
     $(".big-checkbox").val("false");
     $(".numTextBox").val('');
@@ -178,7 +167,6 @@ $("form").on('submit', function (e) {
     
 })
 
-// set Date 
 const dateTag = document.getElementById('date')
 const date = new Date()
 const year = date.getFullYear()
@@ -188,7 +176,6 @@ let html = `${year}년 ${month}월 ${date_}일`
 
 dateTag.innerHTML = html
 
-// set submitted datas to table
 ipcRenderer.on('products', function (event, data_) {
     let products = data_[0]
     let confirmations = data_[1]
@@ -305,7 +292,6 @@ ipcRenderer.on('products', function (event, data_) {
     
 })
 
-// set value when clicked checkbox in table
 $('#calculatorT_tbody').on('click','.infoCheckbox', function () {
     let value = this.value
     this.value = checkboxVal(value)
@@ -356,7 +342,6 @@ $('#calculatorT_tbody').on('click','.savebtn', function () {
     ipcRenderer.send('modify-product', data)
 })
 
-// send the submitNum for delete
 $('#calculatorT_tbody').on('click', '.deletebtn', function () {
     let index = parseInt($(this).parent().parent().prev().prev().val())-1
     let submitNum = parseInt($(this).parent().parent().prev().val())
@@ -364,7 +349,6 @@ $('#calculatorT_tbody').on('click', '.deletebtn', function () {
     ipcRenderer.send('delete-product', deleteInfo)
 })
 
-// open price Table window
 $('#priceT').on('click', function () {
     ipcRenderer.send('price-window')
 })
