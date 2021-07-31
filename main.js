@@ -38,9 +38,9 @@ function main () {
         const confirm = data[1]
 
         // add and save data to dataStore 
-        const updatedProducts = productsData.addProduct(product).products
+        const updatedProducts = productsData.add(product).products
         // add and save data to ConfirmDataStore 
-        const updatedConfrimation = confirmData.addProduct(confirm).products
+        const updatedConfrimation = confirmData.add(confirm).products
 
         const data_ = [updatedProducts, updatedConfrimation]
         
@@ -56,8 +56,8 @@ function main () {
         if(submitNumMatchCheck()){
             
             // modify and save data to dataStore
-            const modifiedProducts = productsData.modifyProduct(product).products
-            const modifiedConfirmation = confirmData.modifyProduct(userConfirmation).products
+            const modifiedProducts = productsData.modify(product).products
+            const modifiedConfirmation = confirmData.modify(userConfirmation).products
             const data_ = [modifiedProducts, modifiedConfirmation]
 
             // send to index.html modifiedData
@@ -67,8 +67,8 @@ function main () {
 
     ipcMain.on('delete-product', function (event, deleteInfo) {
     
-        const updatedProducts = productsData.deleteProduct(deleteInfo).products
-        const updatedConfrimation = confirmData.deleteProduct(deleteInfo).products
+        const updatedProducts = productsData.delete(deleteInfo).products
+        const updatedConfrimation = confirmData.delete(deleteInfo).products
         const data_ = [updatedProducts, updatedConfrimation]
 
         mainWindow.webContents.send('products', data_)

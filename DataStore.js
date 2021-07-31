@@ -15,15 +15,15 @@ class DataStore extends Store {
         return this.products
     }
 
-    saveProducts () {
-        console.log('this is saveProducts')
+    save () {
+        console.log('this is save')
         this.set('products', this.products)
         return this
     }
 
     // sort products desc.
-    sortProducts () {
-        console.log('this is sortProducts')
+    sort () {
+        console.log('this is sort')
         function custonSort(a, b) {
             if(a.name == b.name){ 
                 return 0} 
@@ -33,15 +33,15 @@ class DataStore extends Store {
         let beforeSorted = this.products; 
         this.products = beforeSorted.sort(custonSort);
         
-        return this.saveProducts()
+        return this.save()
     }
 
-    addProduct (product) {
+    add (product) {
         this.products = [ ...this.products, product ]
-        return this.sortProducts()
+        return this.sort()
     }
 
-    modifyProduct (product) {
+    modify (product) {
         let beforeProduct = this.getProducts()
         let index = product[0]
         let submitNum = product[1]
@@ -63,17 +63,17 @@ class DataStore extends Store {
 
                 }
             }else{
-                console.log('Error: modifyProduct() the submitNum does not match')
+                console.log('Error: modify() the submitNum does not match')
             }
 
             if(beforename != modifyobj.name){
-                return this.sortProducts()
+                return this.sort()
             }
 
-        return this.saveProducts()
+        return this.save()
     }
 
-    deleteProduct(deleteInfo) {
+    delete(deleteInfo) {
         let index = deleteInfo[0]
         let submitNum = deleteInfo[1]
         let products = this.getProducts()
@@ -83,11 +83,11 @@ class DataStore extends Store {
             products.splice(index, 1);
             
         }else{
-            console.log(`Error: deleteProduct() the submitNum does not match`)
+            console.log(`Error: delete() the submitNum does not match`)
         }
         
         this.products = products
-        return this.saveProducts()
+        return this.save()
     }
     
     

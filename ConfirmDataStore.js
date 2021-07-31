@@ -4,7 +4,7 @@ const DataStore = require('./DataStore')
 
 class ConfirmDataStore extends DataStore {
     
-    modifyProduct(confirm) {
+    modify(confirm) {
         let confirmations = this.getProducts()
         let index = confirm.index
         if(confirm.name === confirmations[index].name && confirm.confirmQuantity === 0 && confirm.confirmPrice === 0) {
@@ -21,10 +21,10 @@ class ConfirmDataStore extends DataStore {
             confirmations[index].name = confirm.name
             this.products = confirmations
             
-            return this.sortProducts()
+            return this.sort()
         }
         
-        return this.saveProducts()
+        return this.save()
     }
 }
 
