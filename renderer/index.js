@@ -325,7 +325,7 @@ $('#calculatorT_tbody').on('click','.savebtn', function () {
 
     // get confirmation price
     let confirmQuantity = parseInt($(this).parent().next().children().val())
-    let confirmPrice = parseInt($(this).parent().next().next().children().val())
+    let confirmPrice = parseInt($(this).parent().next().next().children().next().val())
     
     if(kg_quantity === undefined) {
         kg_quantity = 0;
