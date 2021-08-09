@@ -12,7 +12,13 @@
   },
   "devDependencies": {
     "electron": "^13.1.6",
-    "electron-builder": "^22.11.7"
+    "electron-builder": "^22.11.7",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-config-prettier": "^8.3.0",
+    "install-peerdeps": "^3.0.3",
+    "prettier": "^2.3.2"
   },
   "scripts": {
     "start": "electron .",
