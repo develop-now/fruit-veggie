@@ -17,5 +17,6 @@ module.exports = {
       },
     ],
     'no-console': 'off',
+    'no-underscore-dangle': 'off',
   },
 };

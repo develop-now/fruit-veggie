@@ -4,6 +4,7 @@
   "description": "calculator program",
   "main": "main.js",
   "dependencies": {
+    "electron": "^13.1.6",
     "bootstrap": "^4.6.0",
     "electron-reload": "^1.5.0",
     "electron-store": "^8.0.0",
@@ -11,7 +12,6 @@
     "popper.js": "^1.16.1"
   },
   "devDependencies": {
-    "electron": "^13.1.6",
     "electron-builder": "^22.11.7",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
