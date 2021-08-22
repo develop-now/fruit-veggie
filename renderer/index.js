@@ -4,7 +4,7 @@ const { ipcRenderer } = require('electron');
 
 let randomNum = 0;
 let hasNumResult = true;
-
+let checkedValue = '';
 // for product id
 function getRandomNum(min, max) {
   const min_ = Math.ceil(min);
@@ -80,7 +80,7 @@ function setDefaultValue(value) {
 }
 
 $('input[name=saleWay]').on('click', () => {
-  const checkedValue = $('input[name=saleWay]:checked').val();
+  checkedValue = $('input[name=saleWay]:checked').val();
 
   if (checkedValue === 'gram') {
     $('.boxQauntity').css('display', 'none');
@@ -162,6 +162,11 @@ $('form').on('submit', (e) => {
   $('input[name = name]').val('');
   $('input[name = unit-price]').val('');
   $('.boxCheked').css('display', 'none');
+  checkedValue = '';
+  $('.boxQauntity').css('display', 'none');
+  $('input[name=quantityByOneBox]').prop('required', false);
+  $('.boxGram').css('display', 'none');
+  $('input[name=box_kg]').prop('required', false);
 });
 
 const dateTag = document.getElementById('date');
