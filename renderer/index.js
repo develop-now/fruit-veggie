@@ -4,7 +4,7 @@ const { ipcRenderer } = require('electron');
 
 let randomNum = 0;
 let hasNumResult = true;
-let checkedValue = '';
+let html = '';
 // for product id
 function getRandomNum(min, max) {
   const min_ = Math.ceil(min);
@@ -73,14 +73,14 @@ $('input[name=name]').on('click', () => {
 function setDefaultValue(value) {
   let value_ = value;
 
-  if (isNaN(value_)) {
+  if (Number.isNaN(value_)) {
     value_ = 0;
   }
   return value_;
 }
 
 $('input[name=saleWay]').on('click', () => {
-  checkedValue = $('input[name=saleWay]:checked').val();
+  const checkedValue = $('input[name=saleWay]:checked').val();
 
   if (checkedValue === 'gram') {
     $('.boxQauntity').css('display', 'none');
@@ -99,17 +99,18 @@ $('input[name=saleWay]').on('click', () => {
 function radioValueCheck() {
   const boxState = $('input[name=box]').val();
   const boxWayCheck = $('input[name=saleWay]').is(':checked');
-  let result = 1;
+  let result = 2;
   if (boxState === 'false') {
-    return result;
+    result = 1;
   }
-  if (!boxWayCheck) {
+  console.log(`boxway${boxWayCheck}`);
+  if (boxState === 'true' && !boxWayCheck) {
     alert(
       'g으로 판매하는 상품: 그램판매\n개수로 판매하는 상품: 개수판매를 선택하시오\n*해당사항이 없을경우: 박스입고체크를 해제하시오'
     );
     result = 0;
-    return result;
   }
+  return result;
 }
 
 $('form').on('submit', (e) => {
@@ -122,7 +123,7 @@ $('form').on('submit', (e) => {
   const submitNum = parseInt($('input[name=submitNum]').val());
   const name = $('input[name=name]').val();
   const box = $('input[name=box]').val();
-  const box_kg = setDefaultValue(parseInt($('input[name=box_kg]').val()));
+  const boxKg = setDefaultValue(parseInt($('input[name=box_kg]').val()));
   const quantity = parseInt($('input[name=quantity]').val());
   const quantityByOneBox = setDefaultValue(
     parseInt($('input[name=quantityByOneBox]').val())
@@ -137,7 +138,7 @@ $('form').on('submit', (e) => {
     submitNum,
     name,
     box,
-    box_kg,
+    boxKg,
     quantity,
     quantityByOneBox,
     packing,
@@ -162,8 +163,8 @@ $('form').on('submit', (e) => {
   $('input[name = name]').val('');
   $('input[name = unit-price]').val('');
   $('.boxCheked').css('display', 'none');
-  checkedValue = '';
   $('.boxQauntity').css('display', 'none');
+  $('input[name=saleWay]').prop('checked', false);
   $('input[name=quantityByOneBox]').prop('required', false);
   $('.boxGram').css('display', 'none');
   $('input[name=box_kg]').prop('required', false);
@@ -174,7 +175,7 @@ const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth() + 1;
 const date_ = date.getDate();
-const html = `${year}년 ${month}월 ${date_}일`;
+html = `${year}년 ${month}월 ${date_}일`;
 
 dateTag.innerHTML = html;
 
@@ -183,9 +184,9 @@ ipcRenderer.on('products', (event, data_) => {
   const confirmations = data_[1];
 
   const calculatorTbody = document.getElementById('calculatorT_tbody');
-  let html = '';
+  html = '';
   if (products.length > 0) {
-    products.forEach((product, index, products) => {
+    products.forEach((product, index) => {
       const confirmData = confirmations[index];
       const marginPrice = Math.floor(
         product.unitPrice * (product.marginRate * 0.01) + product.unitPrice
@@ -348,7 +349,7 @@ $('#calculatorT_tbody').on('click', '.savebtn', function () {
   const quantity = parseInt(
     $(this).parent().prev().prev().prev().prev().prev().prev().children().val()
   );
-  let kg_quantity = parseInt(
+  let kgQuantity = parseInt(
     $(this).parent().prev().prev().prev().prev().prev().children().val()
   );
   const unitPrice = parseInt(
@@ -365,8 +366,8 @@ $('#calculatorT_tbody').on('click', '.savebtn', function () {
     $(this).parent().next().next().children().next().val()
   );
 
-  if (kg_quantity === undefined) {
-    kg_quantity = 0;
+  if (kgQuantity === undefined) {
+    kgQuantity = 0;
   }
 
   confirmQuantity = setDefaultValue(confirmQuantity);
@@ -374,7 +375,7 @@ $('#calculatorT_tbody').on('click', '.savebtn', function () {
 
   const modifyobj = {
     name,
-    kg_quantity,
+    kgQuantity,
     quantity,
     packing,
     unitPrice,
