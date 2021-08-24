@@ -18,5 +18,8 @@ module.exports = {
     ],
     'no-console': 'off',
     'no-underscore-dangle': 'off',
+    'no-alert': 'off',
+    'func-names': ['error', 'never'],
+    radix: ['error', 'as-needed'],
   },
 };
