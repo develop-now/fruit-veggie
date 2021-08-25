@@ -54,7 +54,7 @@ $('input[name=box]').on('click', function () {
     $('.boxCheck').css('display', 'none');
     $('.boxCheck').children().val('');
     $('input[name=saleWay]').prop('checked', false);
-    $('input[name=box_kg]').prop('required', false);
+    $('input[name=boxKg]').prop('required', false);
     $('input[name=quantityByOneBox]').prop('required', false);
   }
 });
@@ -86,10 +86,10 @@ $('input[name=saleWay]').on('click', () => {
     $('.boxQauntity').css('display', 'none');
     $('input[name=quantityByOneBox]').prop('required', false);
     $('.boxGram').css('display', 'block');
-    $('input[name=box_kg]').prop('required', true);
+    $('input[name=boxKg]').prop('required', true);
   }
   if (checkedValue === 'quantity') {
-    $('input[name=box_kg]').prop('required', false);
+    $('input[name=boxKg]').prop('required', false);
     $('.boxGram').css('display', 'none');
     $('.boxQauntity').css('display', 'block');
     $('input[name=quantityByOneBox]').prop('required', true);
@@ -123,7 +123,7 @@ $('form').on('submit', (e) => {
   const submitNum = parseInt($('input[name=submitNum]').val());
   const name = $('input[name=name]').val();
   const box = $('input[name=box]').val();
-  const boxKg = setDefaultValue(parseInt($('input[name=box_kg]').val()));
+  const boxKg = setDefaultValue(parseInt($('input[name=boxKg]').val()));
   const quantity = parseInt($('input[name=quantity]').val());
   const quantityByOneBox = setDefaultValue(
     parseInt($('input[name=quantityByOneBox]').val())
@@ -167,7 +167,7 @@ $('form').on('submit', (e) => {
   $('input[name=saleWay]').prop('checked', false);
   $('input[name=quantityByOneBox]').prop('required', false);
   $('.boxGram').css('display', 'none');
-  $('input[name=box_kg]').prop('required', false);
+  $('input[name=boxKg]').prop('required', false);
 });
 
 const dateTag = document.getElementById('date');
@@ -191,7 +191,7 @@ ipcRenderer.on('products', (event, data_) => {
       const marginPrice = Math.floor(
         product.unitPrice * (product.marginRate * 0.01) + product.unitPrice
       );
-      const byGram = Math.ceil((marginPrice / product.box_kg) * 0.1);
+      const byGram = Math.ceil((marginPrice / product.boxKg) * 0.1);
       const byQuantity = Math.ceil(marginPrice / product.quantityByOneBox);
 
       html +=
@@ -203,8 +203,8 @@ ipcRenderer.on('products', (event, data_) => {
         `<td><input type="text" class="productInfo productInfoName" name="name" value="${product.name}" style="width:180px"></td>` +
         `<td><input type="number" class="productInfo" name="quantity" value="${product.quantity}" style="width:30px"></td>`;
 
-      if (product.box === 'true' && product.box_kg != 0) {
-        html += `<td><input type="number" class="productInfo" name="box_kg" value="${product.box_kg}" style="width:35px"><span class="lightText">kg<span></td>`;
+      if (product.box === 'true' && product.boxKg != 0) {
+        html += `<td><input type="number" class="productInfo" name="boxKg" value="${product.boxKg}" style="width:35px"><span class="lightText">kg<span></td>`;
       } else if (product.box === 'true' && product.quantityByOneBox != 0) {
         html += `<td><input type="number" class="productInfo" name="quantityByOneBox" value="${product.quantityByOneBox}" style="width:35px"><span class="lightText">개<span></td>`;
       } else {
@@ -219,7 +219,7 @@ ipcRenderer.on('products', (event, data_) => {
 
       if (product.box === 'true' && product.quantityByOneBox != 0) {
         html += `<td>${byQuantity}<span class="lightText">원<span></td>`;
-      } else if (product.box === 'true' && product.box_kg != 0) {
+      } else if (product.box === 'true' && product.boxKg != 0) {
         html += `<td>${byGram}<span class="lightText">원<span></td>`;
       } else {
         html += '<td>-</td>';
@@ -238,7 +238,7 @@ ipcRenderer.on('products', (event, data_) => {
         '<td class="userCheck">' +
         `<input type="number" value="${confirmData.confirmQuantity}" style="width:35px; margin-bottom:1px;"><span class="lightText">`;
 
-      if (product.box_kg != 0) {
+      if (product.boxKg != 0) {
         html += 'g';
       } else {
         html += '개';
@@ -251,7 +251,7 @@ ipcRenderer.on('products', (event, data_) => {
         '<input class="addRemove" type="button" value="+">' +
         '</td>';
 
-      if (product.box === 'true' && product.box_kg != 0) {
+      if (product.box === 'true' && product.boxKg != 0) {
         if (product.packing === 'true') {
           html +=
             `<td class="priceCol">${

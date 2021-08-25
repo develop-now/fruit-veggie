@@ -54,14 +54,14 @@ class DataStore extends Store {
 
       if (
         beforeProduct[index].box === 'true' &&
-        beforeProduct[index].box_kg != 0
+        beforeProduct[index].boxKg != 0
       ) {
-        beforeProduct[index].box_kg = modifyobj.kg_quantity;
+        beforeProduct[index].boxKg = modifyobj.kgQuantity;
       } else if (
         beforeProduct[index].box === 'true' &&
         beforeProduct[index].quantityByOneBox != 0
       ) {
-        beforeProduct[index].quantityByOneBox = modifyobj.kg_quantity;
+        beforeProduct[index].quantityByOneBox = modifyobj.kgQuantity;
       }
     } else {
       console.log('Error: modify() the submitNum does not match');
