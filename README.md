@@ -13,7 +13,7 @@
 <br/>
 
 ### 화면구성 및 작동방식
-![img](./readmeImg/fruit-veggiGUI.png)
+![img](./readmeImg/fruit-veggi.png)
 ## Prerequisites
 node.js installed
 
