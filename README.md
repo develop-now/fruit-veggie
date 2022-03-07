@@ -1,4 +1,4 @@
-# [fruit-veggie] Electron 상품 단가계산 GUI 프로그램
+## [fruit-veggie] Electron 상품 단가계산 GUI 프로그램
 ### 사용기술 및 개발환경
 - Window 10
 - Electron 13.1
